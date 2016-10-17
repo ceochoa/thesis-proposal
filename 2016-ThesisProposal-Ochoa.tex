@@ -1,0 +1,74 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[hang,small]{caption}
+\usepackage{setspace}
+\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
+\usepackage{versions}
+\excludeversion{INUTILE}
+%\excludeversion{LONG}\excludeversion{VLONG}\includeversion{SHORT}
+\includeversion{LONG}\excludeversion{SHORT}\includeversion{VLONG}
+\markversion{TODO}
+\markversion{TODOSRINIVAS}
+\excludeversion{TODOSRINIVAS}
+\excludeversion{TODO}
+
+\begin{titlepage}
+\title{Thesis proposal: \\Synergistic Analysis of Algorithms and Data Structures.}
+\author{Carlos Ochoa$^{1}$
+  \\\\\\\\\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+  \\Advisor: J\'er\'emy Barbay$^1$\\\\\\\\
+  $^1$ Departamento de Ciencias de la Computaci\'on (DCC),\\ Universidad de Chile, Santiago, Chile.
+}
+\date{\today}
+\newtheorem*{thma}{Proposition}
+\end{titlepage}
+\begin{document}
+%\doublespacing
+\maketitle
+\begin{abstract}
+  Karp et al. (1988) described Deferred Data Structures for Multisets
+  as ``lazy'' data structures which partially sort data to support
+  online rank and select queries, with the minimum amount of work in
+  the worst case over instances of size $n$ and number of queries $q$
+  fixed (i.e., the query size). Barbay et al. (2016) refined this
+  approach to take advantage of the gaps between the positions hit by
+  the queries (i.e., the structure in the queries). We develop new
+  techniques in order to further refine this approach and to take
+  advantage all at once of the structure (i.e., the multiplicities of
+  the elements), the local order (i.e., the number and sizes of runs)
+  and the global order (i.e., the number and positions of existing
+  pivots) in the input; and of the structure and order in the sequence
+  of queries. Our main result is a synergistic deferred data structure
+  which performs much better on large classes of instances, while
+  performing always asymptotically as good as previous solutions. As
+  intermediate results, we describe two new synergistic sorting
+  algorithms, which take advantage of the structure and order (local
+  and global) in the input, improving upon previous results which take
+  advantage only of the structure (Munro and Spira 1979) or of the
+  local order (Takaoka 1997) in the input; and one new multiselection
+  algorithm which takes advantage of not only the order and structure
+  in the input, but also of the structure in the queries.  We
+  described two compressed data structures to represent a multiset
+  taking advantage of both the local order and structure, while
+  supporting the operators \texttt{rank} and \texttt{select} on the
+  multiset.
+\end{abstract}
+\clearpage
+
+\input{proposal}
+
+\bibliographystyle{plain}
+\bibliography{bibliographyDatabaseJeremyBarbay,publicationsJeremyBarbay,addedForThePaper}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

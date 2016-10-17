@@ -1,0 +1,153 @@
+\section{Thesis statement}
+
+Consider a \emph{multiset} $\mathcal{M}$ of size $n$ (e.g.,
+$\mathcal{M}=\{1,2,3,3,4,5,6,7,8,9\}$ of size $n=10$).
+%
+% Frequency, Input Structure.
+The \emph{multiplicity} of an element $x$ of $\mathcal{M}$ is the
+number $m_x$ of occurrences of $x$ in $\mathcal{M}$ (e.g.,
+  $m_3=2$). We call the distribution of the multiplicities
+of the elements in $\mathcal{M}$ the \emph{input
+  structure}\begin{LONG}
+  , and denote it by a set of pairs $(x,m_x)$ (e.g., $\{(1,1)$,
+  $(2,1)$, $(3,2)$, $(4,1)$, $(5,1)$, $(6,1)$, $(7,1)$, $(8,1)$,
+  $(9,1)\}$ in $\mathcal{M}$)\end{LONG}.
+%
+As early as 1976, Munro and
+Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
+described a variant of the algorithm {\tt{MergeSort}} using counters,
+which optimally takes advantage of the input structure
+\begin{LONG}
+  (i.e., the multiplicities of the distinct elements)
+\end{LONG}
+when sorting a multiset $\mathcal{M}$ of $n$ elements. Munro and Spira
+measure
+the ``difficulty'' of the instance in terms of the ``input structure''
+by the entropy function
+$\mathcal{H}(m_1, \dots, m_\sigma) =
+\sum_{i=1}^\sigma{\frac{m_i}{n}}\log{\frac{n}{m_i}}$. The time
+complexity of the algorithm is within
+$O(n(1 + \mathcal{H}(m_1, \dots, m_\sigma))) \subseteq
+O(n(1{+}\log{\sigma})) \subseteq O(n\log{n})$, where $\sigma$ is the
+number of distinct elements in $\mathcal{M}$ and
+$m_1, \dots, m_\sigma$ are the multiplicities of the $\sigma$ distinct
+elements in $\mathcal{M}$ (such that $\sum_{i=1}^\sigma {m_i}=n$),
+respectively.
+
+%% Local Input Order, Runs
+Any array $\mathcal{A}$ representing a multiset lists its element in
+some order, which we call the \emph{input order} and denote by a tuple
+(e.g., $\mathcal{A}=(2,3,1,3,7,8,9,4,5,6)$). Maximal sorted subblocks
+in $\mathcal{A}$ are a local form of input order and are called
+\emph{runs}~\cite{1973-BOOK-TheArtOfComputerProgrammingVol3-Knuth}
+(e.g., $\{(2,3)$, $(1,3,7,8,9)$, $(4,5,6)\}$ in $\mathcal{A}$).
+%
+As early as 1973,
+Knuth~\cite{1973-BOOK-TheArtOfComputerProgrammingVol3-Knuth} described
+a variant of the algorithm {\tt{MergeSort}} using a prepossessing step
+taking linear time to detect \emph{runs} in the array $\mathcal{A}$\begin{LONG}, which he named \texttt{Natural MergeSort}.
+  Mannila~\cite{1985-TCom-MeasuresOfPresortednessAndOptimalSortingAlgorithms-Mannila}
+  refined the analysis of the \texttt{Natural MergeSort} algorithm to
+  yield a time complexity for sorting an array $\mathcal{A}$ of size $n$
+  in time within $O(n(1+\log\rho))\subseteq O(n\lg n)$, where $\rho$
+  is the number of \emph{runs} in the $\mathcal{A}$\end{LONG}.
+Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}
+described a new sorting algorithm that optimally takes advantage of the distribution of
+the sizes of the runs in the array $\mathcal{A}$, which yields a time complexity within
+$O(n(1+\mathcal{H}(r_1, \dots, r_{\rho}))) \subseteq
+O(n(1{+}\log{\rho})) \subseteq O(n\log{n})$, where $\rho$ is the
+number of runs in $\mathcal{A}$ and $r_1, \dots, r_{\rho}$ are the sizes
+of the $\rho$ \emph{runs} in $\mathcal{A}$ (such that
+$\sum_{i=1}^\rho {r_i}=n$), respectively.
+\begin{LONG}
+  It is worth noting that in 1997,
+  Takaoka~\cite{1997-TR-MinimalMergesort-Takaoka} first described this
+  algorithm in a technical report.
+\end{LONG}
+
+%% The questions
+This suggests the following questions:
+\textbf{\begin{enumerate}
+  \item Is there a sorting algorithm for multisets which takes the
+    best advantage of both its \emph{input order} and its \emph{input
+      structure} in a synergistic way, so that it performs as good as
+    previously known solutions on all instances, and much better on
+    instances where it can take advantage of both at the same time?
+  \item Is there a multiselection algorithm and a deferred data structure
+    for answering \texttt{rank} and \texttt{select} queries which
+    takes the best advantage not only of both of those notions of
+    easiness in the input, but additionally also of notions of
+    easiness in the queries, such as the \emph{query structure} and
+    the \emph{query order}?
+  \end{enumerate}
+}
+
+%% Our Results
+We answer both questions affirmatively: 
+%
+In the context of \textsc{Sorting}, this improves upon both algorithms from Munro and Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}. 
+%
+In the context of \textsc{MultiSelection} and \textsc{Deferred Data
+  Structure} for \texttt{rank} and \texttt{select} on
+\textsc{Multisets}, this improves upon Barbay et al.'s
+results~\cite{2016-JDA-NearOptimalOnlineMultiselectionInInternalAndExternalMemory-BarbayGuptaRaoSorenson}
+by adding 3 new measures of difficulty (input order, input structure
+and query order) to the single one previously considered (query
+structure). Even though the techniques used by our algorithms are
+known, the techniques used to refine the analysis of these algorithms
+to show that they improve the state of the art are complex.
+%
+Additionally, 
+%
+we correct the analysis of the \texttt{Sorted Set Union} algorithm by Demaine et al.~\cite{2000-SODA-AdaptiveSetIntersectionsUnionsAndDifferences-DemaineLopezOrtizMunro}, and
+%
+we define a simple yet new notion of ``global'' input order, formed by the number of
+  preexisting pivot positions in the input (e.g. $(3,2,1,6,5,4)$ has
+  one pre-existing pivot position in the middle), not
+mentioned in previous
+surveys~\cite{1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood,1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson} nor extensions \cite{2013-TCS-OnCompressingPermutationsAndAdaptiveSorting-BarbayNavarro}.
+
+\section{Background}
+
+\subsection{Sorting}
+
+\subsection{Multiselection Problem}
+
+\subsection{Deferred Data Structures}
+
+\subsection{Compressed Data Structures}
+
+\subsection{Maxima}
+
+\subsection{Convex Hull}
+
+\section{Prior Work}
+
+\subsection{Sorting}
+
+\subsection{Multiselection Problem}
+
+\subsection{Deferred Data Structures}
+
+\section{Research Challenges}
+
+\subsection{Compressed Data Structures}
+
+\subsection{Maxima and Convex Hull}
+
+\subsection{Takaoka Problems [List the problems]}
+
+\section{Plan}
+
+\subsection{Paper 1: Synergistic Sorting, Multiselection and Deferred
+  Data Structures}
+
+\subsection{Paper 2: Synergistic Compressed Data Structures [RMQ,
+  NSV, PSV, permutations, Sequences]}
+
+\subsection{Paper 3: Synergistic Maxima [and Convex Hull] Algorithms}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "2016-ThesisProposal-Ochoa"
+%%% End:
