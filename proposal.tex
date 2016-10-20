@@ -1,6 +1,8 @@
 \section{Introduction}
 \label{sec:intro}
 
+% Intro to Adaptive Analysis
+
 The computational complexity of most problems is studied in the worst
 case over instances of fixed size $n$, for $n$ asymptotically tending
 to infinity. This approach was refined for NP-difficult problems under
@@ -11,10 +13,6 @@ Algorithms''~\cite{1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroW
 and more simply for data encodings under the term of ``Data
 Compression''~\cite{2013-TCS-OnCompressingPermutationsAndAdaptiveSorting-BarbayNavarro},
 for a wide range of problems and data types.
-%
-  %% Many distinct analysis $\implies$ need to classify them (if only
-  %% to teach them)
-%
 Such a variety of results has motivated various tentative to classify
 them, in the context of NP-hard problems with a theory of Fixed
 Parameter
@@ -22,13 +20,14 @@ Tractability~\cite{2006-BOOK-ParameterizedComplexityTheory-FlumGrohe},
 and in the context of sorting in the comparison model with a theory of
 reduction between
 parameters~\cite{1995-DAM-AFrameworkForAdaptiveSorting-PeterssonMoffat}.
-%
-%% We present a classification
 
-In the context of ``Adaptive Analisys of Algorithms'' the results can
-be partitioned into two categories of techniques: those taking
-advantage of the \emph{input order} (e.g., disorder measures for
-\textsc{Sorting}~\cite{1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson,1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood}),
+% Examples of Results and Classification in Adaptive Analysis
+
+In the context of ``Adaptive Analysis of Algorithms'', we introduce
+two other perspectives from which to classify algorithms and data
+structures: those taking advantage of the \emph{input order} (e.g.,
+disorder measures for
+\textsc{Sorting}~\cite{1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson,1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood},
 \textsc{Convex Hull}
 algorithms~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell})
 and those taking advantage of the \emph{input structure} (e.g., output
@@ -37,37 +36,113 @@ algorithms~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeide
 input order oblivious instance
 optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}).
 
+By \emph{input order} we mean algorithms taking advantage of the order
+of the input, for example, taking advantage of the order of the values
+in a sequence of numbers or of the order in which the points are given
+in a polygonal chain.
+
+Concerning the \textsc{Sorting} problem, as early as 1973,
+Knuth~\cite{1973-BOOK-TheArtOfComputerProgrammingVol3-Knuth} described
+a variant of the algorithm {\tt{MergeSort}} that sorts an array
+$\mathcal{A}$ using a prepossessing step taking linear time to detect
+maximal sorted subblocks, called \emph{runs}, in $\mathcal{A}$.
+Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}
+described a new sorting algorithm that optimally takes advantage of
+the distribution of the sizes of the runs in the array $\mathcal{A}$,
+which yields a time complexity within
+$O(n(1+\mathcal{H}(r_1, \dots, r_{\rho}))) \subseteq
+O(n(1{+}\log{\rho})) \subseteq O(n\log{n})$, where $\rho$ is the
+number of runs in $\mathcal{A}$ and $r_1, \dots, r_{\rho}$ are the
+sizes of the $\rho$ \emph{runs} (such that $\sum_{i=1}^\rho {r_i}=n$),
+respectively. Takaoka measures the ``difficulty'' of the instance in
+terms of the ``input order'' by the entropy function
+$\mathcal{H}(m_1, \dots, m_\sigma) =
+\sum_{i=1}^\sigma{\frac{m_i}{n}}\log{\frac{n}{m_i}}$. These results
+take advantage of the order of the values in the input i.e., the input
+order.
+
+Considering the computation of the {\sc{Convex Hull}} in the plane, Levcopoulos et al.~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell} described a divide-and-conquer algorithm for computing the {\sc{Convex Hull}} of a polygonal chain. The algorithm is based in the fact that the {\sc{Convex Hull}} of a simple chain can be computed in linear time, and that deciding whether a given chain is simple can be done in linear time.
+They measured the complexity of this algorithm in terms of the minimum
+number of simple subchains $\kappa$ into which the chain can be cut.
+They showed that the time complexity of this algorithm is within
+$O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes advantage of the order in which the points are given i.e., the input order.
+
+By ``input structure'' we mean algorithms taking advantage of the structure of the instance, for example, taking advantage of the frequencies of the values in a multiset or of the relative positions of the points in a set.
+
+Concerning the {\sc{Sorting}} problem, Munro and
+Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
+considered the task of {\sc{Sorting}} a multiset
+$S=\{x_1, \dots, x_n\}$ of $n$ real numbers with $\sigma$ distinct
+values, of multiplicities $m_1, \dots, m_\sigma$ (such that
+$\sum_{i=1}^\sigma {m_i}=n$), respectively. They showed that adding
+counters to various classical algorithms
+\begin{INUTILE}
+  (among which the divide-and-conquer based algorithm
+  {\tt{MergeSort}})
+\end{INUTILE}
+yields a time complexity within
+$O(n(1+\mathcal{H}(m_1, \dots, m_\sigma))) \subseteq
+O(n(1{+}\log{\sigma})) \subseteq O(n\log{n})$ for {\sc{Sorting}} a
+multiset. This result takes advantage of
+the frequencies of the values i.e., the structure of the instance.
+
+Considering the problem of computing the {\sc{Convex Hull}}, Kirkpatrick and Seidel~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel} described an algorithm to compute the {\sc{Convex Hull}} of a set of $n$ planar points in time within $O(n(1+\log h))\subseteq O(n\log n)$, where $h$ is the number of vertices in the {\sc{Convex Hull}}.
+\begin{INUTILE}
+  The algorithm relies on a variation of the divide-and-conquer
+  paradigm, which they call the ``Marriage-Before-Conquest''
+  principle.
+\end{INUTILE}
+Afshani et al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan} refined the complexity analysis of this algorithm to within $O(n(1+{\cal H}(n_1,\ldots,n_h)))\subseteq O(n(1{+}\log h)) \subseteq O(n\log{n})$, where $n_1, \dots, n_h$ are the sizes of a partition of the input, such that every element of the partition is a singleton or can be enclosed by a triangle whose interior is completely below the upper hull of the set, and ${\cal H}(n_1,\ldots,n_h)$ has the minimum possible value (minimum entropy of the distribution of the points into a certificate of the instance). This result takes advantage of the positions of the points i.e., the structure of the instance.
+
+% Hypothesis
+
+\paragraph{Hypothesis: Is it possible to combine both categories of
+techniques into a single algorithm taking advantage of the input order
+and the input structure in a synergistic way?}~\\
+
+% Conclusion
+
+Through the study of the sorting of multisets according to the
+potential ``easiness'' in both the order and the values in the
+multiset, in Section~\ref{sec:syn-sort} we show an
+example of the difficulty of combining both into a single hybrid
+algorithmic technique.
+%
+Through the study of the online support of \texttt{rank} and
+\texttt{select} queries on multisets according to the potential
+``easiness'' in both the order and the values in the queries
+themselves (in addition to the potential easiness in the data being
+queried), in Section~\ref{sec:multiselect} and Section~\ref{sec:dds}
+we extend the results to the context of \textsc{MultiSelection} and
+\textsc{Deferred Data Structures}. These combinations yield a better
+understanding of the problems and more efficient solutions which we
+hope to extend to other problems (Section~\ref{sec:compressed},
+Section~\ref{sec:maxima} and Section~\ref{sec:hull}).
 
 
 
-  We introduced two other perspectives from which to classify
-  algorithms and data structures.
+We predict that such analysis techniques will take on more importance
+in the future, along with the growth of the block between practical
+cases and the worst case over instances of fixed sizes. Furthermore,
+we conjecture that synergistic techniques taking advantage of more
+than one ``easiness'' aspect will be of practical importance if the
+block between theoretical analysis and practice is to ever be reduced.
+
+
+% New result
+
+\begin{INUTILE}
+  We improve the analysis of this algorithm including not only the
+  minimum number of simple subchain into which the polygonal chain can
+  be partitioned but also their sizes (see
+  Section~\ref{sec:comp-conv-hulls}).
+\end{INUTILE}
 %
-  Through the study of the sorting of multisets according to the
-  potential ``easiness'' in both the order and the values in the
-  multiset, we aimed to introduce a way to classify refined techniques
-  of complexity analysis between the ones considering the input order
-  and the ones considering the structure in the input; and to show an
-  example of the difficulty of combining both into a single hybrid
-  algorithmic technique.
+
+
+% Motivation and Partial Solutions
+
 %
-  Through the study of the online support of \texttt{rank} and
-  \texttt{select} queries on multisets according to the potential
-  ``easiness'' in both the order and the values in the queries
-  themselves (in addition to the potential easiness in the data being
-  queried), we aimed to introduce
-% 
-  %% Categorizing fine grained analysis between data order and
-  %% structure
-  % - Synergetic solutions
-%
-  such categorizations. We predict that such analysis techniques will
-  take on more importance in the future, along with the growth of the
-  block between practical cases and the worst case over instances of
-  fixed sizes. Furthermore, we conjecture that synergistic techniques
-  taking advantage of more than one ``easiness'' aspect will be of
-  practical importance if the block between theoretical analysis and
-  practice is to ever be reduced.
 
 \section{Sorting Solutions}
 \label{sec:sort}
@@ -94,9 +169,10 @@ optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
 \label{sec:compressed}
 
 \section{Maxima Solutions}
+\label{sec:maxima}
 
 \section{Convex Hull Solutions}
-
+\label{sec:hull}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "2016-ThesisProposal-Ochoa"
