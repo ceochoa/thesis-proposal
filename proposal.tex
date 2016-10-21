@@ -41,6 +41,7 @@ of the input, for example, taking advantage of the order of the values
 in a sequence of numbers or of the order in which the points are given
 in a polygonal chain.
 
+% input order sorting
 Concerning the \textsc{Sorting} problem, as early as 1973,
 Knuth~\cite{1973-BOOK-TheArtOfComputerProgrammingVol3-Knuth} described
 a variant of the algorithm {\tt{MergeSort}} that sorts an array
@@ -56,16 +57,23 @@ number of runs in $\mathcal{A}$ and $r_1, \dots, r_{\rho}$ are the
 sizes of the $\rho$ \emph{runs} (such that $\sum_{i=1}^\rho {r_i}=n$),
 respectively. Takaoka measures the ``difficulty'' of the instance in
 terms of the ``input order'' by the entropy function
-$\mathcal{H}(m_1, \dots, m_\sigma) =
-\sum_{i=1}^\sigma{\frac{m_i}{n}}\log{\frac{n}{m_i}}$. These results
+$\mathcal{H}(r_1, \dots, r_\sigma) =
+\sum_{i=1}^\sigma{\frac{r_i}{n}}\log{\frac{n}{r_i}}$. These results
 take advantage of the order of the values in the input i.e., the input
 order.
 
-Considering the computation of the {\sc{Convex Hull}} in the plane, Levcopoulos et al.~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell} described a divide-and-conquer algorithm for computing the {\sc{Convex Hull}} of a polygonal chain. The algorithm is based in the fact that the {\sc{Convex Hull}} of a simple chain can be computed in linear time, and that deciding whether a given chain is simple can be done in linear time.
-They measured the complexity of this algorithm in terms of the minimum
-number of simple subchains $\kappa$ into which the chain can be cut.
-They showed that the time complexity of this algorithm is within
-$O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes advantage of the order in which the points are given i.e., the input order.
+% input order convex hull
+Considering the computation of the {\sc{Convex Hull}} in the plane,
+Levcopoulos et
+al.~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell}
+described a divide-and-conquer algorithm for computing the {\sc{Convex
+    Hull}} of a polygonal chain. They measured the complexity of this
+algorithm in terms of the minimum number of simple subchains $\kappa$
+into which the chain can be cut.  They showed that the time complexity
+of this algorithm is within
+$O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes
+advantage of the order in which the points are given i.e., the input
+order.
 
 By ``input structure'' we mean algorithms taking advantage of the structure of the instance, for example, taking advantage of the frequencies of the values in a multiset or of the relative positions of the points in a set.
 
@@ -98,23 +106,35 @@ Afshani et al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayC
 
 \paragraph{Hypothesis: Is it possible to combine both categories of
 techniques into a single algorithm taking advantage of the input order
-and the input structure in a synergistic way?}~\\
+and structure in a synergistic way?}~\\
 
 % Conclusion
 
 Through the study of the sorting of multisets according to the
 potential ``easiness'' in both the order and the values in the
-multiset, in Section~\ref{sec:syn-sort} we show an
-example of the difficulty of combining both into a single hybrid
-algorithmic technique.
+multiset, in Section~\ref{sec:syn-sort} we show an example of the
+difficulty of combining both into a single hybrid algorithmic
+technique. This improves upon both algorithms from Munro and
+Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and
+Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}.
 %
-Through the study of the support of \texttt{rank} and
-\texttt{select} queries on multisets according to the potential
-``easiness'' in both the order and the values in the queries
-themselves (in addition to the potential easiness in the data being
-queried), in Section~\ref{sec:multiselect} and Section~\ref{sec:dds}
-we extend the results to the context of \textsc{MultiSelection} and
-\textsc{Deferred Data Structures}. These combinations yield a better
+Through the study of the support of \texttt{rank} and \texttt{select}
+queries on multisets according to the potential ``easiness'' in both
+the order and the values in the queries themselves (in addition to the
+potential easiness in the data being queried), in
+Section~\ref{sec:multiselect} and Section~\ref{sec:dds} we extend the
+results to the context of \textsc{MultiSelection} and \textsc{Deferred
+  Data Structures}. This improves upon \textsc{MultiSelection}
+algorithms from Dobkin and
+Munro~\cite{1981-JACM-OptimalTimeMinimalSpaceSelectionAlgorithms-DobkinMunro}
+and Kaligosi et
+al.~\cite{2005-ICALP-TowardsOptimalMultopleSelection-KaligosiMehlhornMunroSanders}
+and improve upon \textsc{Deferred Data
+  Structures} results from Barbay et al.'s~\cite{2016-JDA-NearOptimalOnlineMultiselectionInInternalAndExternalMemory-BarbayGuptaRaoSorenson}
+by adding 3 new measures of difficulty (input order, input structure
+and query order) to the single one previously considered (query
+structure).
+These combinations yield a better
 understanding of the problems and more efficient solutions which we
 hope to extend to other problems (Section~\ref{sec:compressed},
 Section~\ref{sec:maxima} and Section~\ref{sec:hull}).
@@ -371,14 +391,350 @@ described in the previous section.
   have values $m_1, \dots, m_{\chi}$.
 \end{theorem}
 
+Next, we generalize the algorithm \texttt{Quick Synergy Sort} to an
+offline multiselection algorithm that partially sorts a multiset according to the set
+of \texttt{select} queries given as input.
+
 \subsection{MultiSelection Algorithm}
 \label{sec:multiselect}
+
+Given a linearly ordered multiset $\mathcal{M}$ and a sequence of
+ranks $r_1, \dots, r_q$, a multiselection algorithm must answer the
+queries \texttt{select}($r_1$), $\dots$, \texttt{select}($r_q$) in
+$\mathcal{M}$, hence partially sorting $\mathcal{M}$.
+
+Given a multiset $\mathcal{M}$ and a set of $q$ \texttt{select}
+queries, the algorithm \texttt{Quick Synergy MultiSelection}
+follows the same first steps as the algorithm \texttt{Quick Synergy
+  Sort}. But once it has computed the ranks of all elements in the block that
+contains the pivot $\mu$, it determines which \texttt{select} queries
+correspond to elements smaller than or equal to $\max_\ell$ and which
+ones correspond to elements greater than or equal to $\min_r$ (see
+Algorithm~\ref{alg:qss} for the definitions of $\max_\ell$ and
+$\min_r$). It then recurses on both sides.
+
+We extend the notion of blocks to the context of partial sorting.
+
+\begin{definition}[Pivot Blocks]
+  Given a multiset $\mathcal{M}$ formed by $\rho$ runs and $\delta$
+  blocks. The ``\emph{pivot blocks}'' are the blocks of $\mathcal{M}$
+  that contain the pivots and the elements of value equals to the
+  pivots during the steps of the algorithm \texttt{Quick Synergy
+    MultiSelection}.
+\end{definition}
+
+In each run, between the pivot blocks and the insertion ranks of the
+pivots, there are consecutive blocks that the algorithm \texttt{Quick Synergy
+  MultiSelection} has not identified as separated blocks, because
+no doubling searches occurred inside them.
+ 
+\begin{definition}[Selection Blocks]
+  Given the $i$-th run, formed of various blocks, and $q$
+  \texttt{select} queries, the algorithm \texttt{Quick Synergy
+    MultiSelection} computes $\xi$ pivots in the process of
+  answering the $q$ queries. During the doubling searches,
+  the algorithm \texttt{Quick Synergy MultiSelection} finds the insertion ranks
+  of the $\xi$ pivots inside the $i$-th run. These positions determine
+  a partition of size $\xi+1$ of the $i$-th run where each element of
+  the partition is formed by consecutive blocks or is empty. We call
+  the elements of this partition ``\emph{selection blocks}''. The
+  set of all selection blocks include the set of all pivot blocks.
+\end{definition}
+
+Using these definitions, we generalize the results in Section~\ref{sec:syn-sort} to the more general problem of \textsc{MultiSelection}.
+
+\begin{theorem}\label{theo:qsms}
+  Given a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
+  $\delta$ blocks; and $q$ offline \texttt{select} queries over
+  $\mathcal{M}$ corresponding to elements of \texttt{ranks}
+  $r_1, \dots, r_q$. The algorithm \texttt{Quick Synergy
+    MultiSelection} computes $\xi$ pivots in the process of answering
+  the $q$ queries. Let $s_1,\dots, s_{\beta}$ be the sizes of the
+  $\beta$ selection blocks determined by these $\xi$ pivots in all
+  runs. Let $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
+  corresponding to the values of the $\lambda$ pivots with
+  multiplicity greater than 1, respectively.  Let
+  $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
+  number of runs that have elements with values between the pivots $i$
+  and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  The
+  algorithm \texttt{Quick Synergy MultiSelection} answers the $q$
+  \texttt{select} queries performing within
+  $O(n + \sum^{\beta}_{i=1}\log{s_i} +
+    \beta\log{\rho}-\sum^{\lambda}_{i=1}m_i\log{m_i} -
+    \sum^{\xi}_{i=0}\rho_i\log{\rho_i}) \subseteq
+  O(n\log{n} - \sum^{q}_{i=0}\Delta_i\log{\Delta_i})$ data
+  comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and
+  $r_{q+1}=n$.
+\end{theorem}
+
+In the result above, the queries are given all at the same time (i.e.,
+offline). In the context where they arrive one at the time (i.e., online), we define
+two \textsc{Deferred Data Structures} for answering online
+\texttt{rank} and \texttt{select} queries, both inspired by the algorithm
+\texttt{Quick Synergy MultiSelection}.
 
 \subsection{Deferred Data Structures for MultiSets}
 \label{sec:dds}
 
+We describe two \textsc{Deferred Data Structures} that answer a set of \texttt{rank} and \texttt{select} queries arriving one at the time over a multiset $\mathcal{M}$, progressively sorting $\mathcal{M}$.  
+%
+Both data structures take advantage of the order (local and global) and structure in the input, and of the structure in the queries.
+%
+The first data structure is in the RAM model of computation, at the cost of not taking advantage of the order in which the queries are given. The second data structure is in the comparison model (a more constrained model) but does take advantage of the query order.
+
+\subsubsection{Taking Advantage of  Order and Structure in the Input, but only of Structure in the Queries}
+
+Given a multiset $\mathcal{M}$ of size $n$, the \textsc{RAM Deferred
+  Data Structure} is composed of a bitvector $\mathcal{A}$ of size
+$n$, in which we mark the elements in $\mathcal{M}$ that have been
+computed as pivots by the algorithm when it answers the online
+queries; a dynamic predecessor and successor structure $\mathcal{B}$
+over the bitvector $\mathcal{A}$, which allows us to find the two
+successive pivots between which the query fits; and for each pivot $p$
+found, the data structure stores pointers to the insertion ranks of
+$p$ in each run, to the beginning and end of the block $g$ to which
+$p$ belongs, and to the position of $p$ inside $g$. The dynamic
+predecessor and successor structure $\mathcal{B}$ requires the RAM
+model of computation in order to answer \emph{predecessor and
+  successor queries} in time within
+$o(\log{n})$~\cite{2002-JCSS-OptimalBoundsForThePredecessorProblemAndRelatedProblems-BeameFich}.
+
+\begin{theorem}\label{theo:online-ram}
+  Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
+  $\delta$ blocks. The \textsc{RAM Deferred Data Structure} computes
+  $\xi$ pivots in the process of answering $q$ online \texttt{rank}
+  and \texttt{select} queries over $\mathcal{M}$. Let
+  $s_1, \dots, s_{\beta}$ be the sizes of the $\beta$ selection
+  blocks determined by these $\xi$ pivots in all runs. Let
+  $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
+  \begin{LONG}
+    among this selection blocks
+  \end{LONG}
+  corresponding to the values of the $\lambda$ pivots with
+  multiplicity greater than 1, respectively.  Let
+  $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
+  number of runs that have elements with values between the pivots $i$
+  and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let $u$ and
+  $g_1, \dots, g_u $ be the number of \texttt{rank} queries and the
+  sizes of the identified and searched blocks in the process of
+  answering the $u$ \texttt{rank} queries, respectively. The
+  \textsc{RAM Deferred Data Structure} answers these $q$ online
+  \texttt{rank} and \texttt{select} queries in time within
+  $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
+  \sum^{\lambda}_{i=1}m_i\log{m_i}
+  - \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \xi\log\log{n} +
+  u\log{n}\log\log{n} + \sum^{u}_{i=1}\log{g_i})$.
+\end{theorem}
+
+The \textsc{RAM Deferred Data Structure} takes advantage of the
+structure in the queries and of the structure and order (local and
+global) in the input. Changing the order in the \texttt{rank} and
+\texttt{select} queries does not affect the time complexity of the
+\textsc{RAM Deferred Data Structure}. Once the structure
+  identifies the nearest pivots to the left and right of the query
+  positions, the steps of the algorithms are the same as in the
+  offline case (Section~\ref{sec:multiselect}). We
+next describe a deferred data structure taking advantage of the
+structure and order in the queries and of the structure and order
+(local and global) in the input data.
+
+\subsubsection{Taking Advantage of the Order and Structure in both the Input and the Queries}
+
+To take advantage of the order in the queries, we introduce a
+data structure that finds the nearest pivots to the left and to the
+right of a position $p\in[1..n]$, while taking advantage of the
+distance between the position of the last computed pivot and $p$. This
+distance is measured in the number of computed pivots between the two
+positions. For that we use a \emph{finger search
+  tree}~\cite{1998-SODA-FingerSearchTreesWithConstantInsertionTime-Brodal}
+which is a search tree maintaining \emph{fingers} (i.e., pointers) to
+elements in the search tree. Finger search trees support efficient
+updates and searches in the vicinity of the
+fingers. Brodal~\cite{1998-SODA-FingerSearchTreesWithConstantInsertionTime-Brodal}
+described an implementation of finger search trees that
+searches for an element $x$, starting the search at the element given by
+the finger $f$ in time within $O(\log{d})$, where $d$ is the distance
+between $x$ and $f$ in the set (i.e, the difference between
+\texttt{rank}$(x)$ and \texttt{rank}$(f)$ in the set). This operation
+returns a finger to $x$ if $x$ is contained in the set, otherwise a
+finger to the largest element smaller than $x$ in the set. This
+implementation supports the insertion of an element $x$ immediately to
+the left or to the right of a finger in \begin{LONG}worst-case\end{LONG} constant
+time.
+
+In the description of the \textsc{RAM Deferred Data Structure} from
+Theorem~\ref{theo:online-ram}, we substitute the dynamic predecessor
+and successor structure $\mathcal{B}$ by a finger search tree
+$\mathcal{F}_{\texttt{select}}$, as described by
+Brodal~\cite{1998-SODA-FingerSearchTreesWithConstantInsertionTime-Brodal}. Once
+a block $g$ is identified, every element in $g$ is a valid pivot for
+the rest of the elements in $\mathcal{M}$. In order to capture this
+idea, we modify the structure $\mathcal{F}_{\texttt{select}}$ so that
+it contains blocks (i.e., a sequence of consecutive values) instead of
+singleton pivots. Each element in $\mathcal{F}_{\texttt{select}}$
+points in $\mathcal{M}$ to the beginning and the end of the block $g$
+that it represents and in each run to the position where the elements
+of $g$ partition the run. This modification allows the structure to
+answer \texttt{select} queries, taking advantage of the structure and
+order in the queries and of the structure and order of the input
+data. But in order to answer \texttt{rank} queries taking advantage of
+the features in the queries and the input data, the structure needs
+another finger search tree $\mathcal{F}_{\texttt{rank}}$. In
+$\mathcal{F}_{\texttt{rank}}$ the structure stores for each block $g$
+identified, the value of one of the elements in $g$, and pointers in
+$\mathcal{M}$ to the beginning and the end of $g$ and in each run to
+the position where the elements of $g$ partition the run. We name this
+structure \textsc{Full-Synergistic Deferred Data Structure}.
+
+\begin{theorem}\label{theo:finger}
+  Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
+  $\delta$ blocks. The \textsc{Full-Synergistic Deferred Data
+    Structure} identifies $\gamma$ blocks in the process of answering
+  $q$ online \texttt{rank} and \texttt{select} queries over
+  $\mathcal{M}$ corresponding to elements of \texttt{ranks} $r_1,
+  \dots, r_q$. Let $s_1, \dots, s_{\beta}$ be the sizes of the $\beta$
+  selection blocks determined by the $\gamma$ blocks in all runs.
+  Let
+  $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
+  \begin{LONG}
+    among this selection blocks
+  \end{LONG}
+  corresponding to the values of the $\lambda$ pivots with
+  multiplicity greater than 1, respectively.  Let
+  $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
+  number of runs that have elements with values between the pivots $i$
+  and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let
+  $d_1, \dots, d_{q-1}$ be the sequence where $d_j$ is the number
+  of identified blocks between the block that answers the $j-1$-th
+  query and the one that answers the $j$-th query before starting the
+  steps to answer the $j$-th query, for $j\in[2..q]$. Let $u$ and
+  $g_1, \dots, g_u $ be the number of \texttt{rank} queries and the
+  sizes of the identified and searched blocks in the process of
+  answering the $u$ \texttt{rank} queries, respectively. The
+  \textsc{Full-Synergistic Deferred Data Structure} answers the $q$
+  online
+  \begin{LONG}
+    \texttt{rank} and \texttt{select}
+  \end{LONG}
+queries performing within
+  $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
+  \sum^{\lambda}_{i=1}m_i\log{m_i} -
+  \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \sum^{q-1}_{i=1}\log{d_i} +
+  \sum^{u}_{i=1}\log{g_i}) \subseteq O\left(n\log{n} -
+    \sum^{q}_{i=0}\Delta_i\log{\Delta_i} + q\log{n}\right)$ data
+  comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and $r_{q+1}=n$.
+\end{theorem}
+
+Next, we describe three problems susceptibles to combinations of input
+order and input structure techniques.
+
 \section{Compressed Data Structures}
 \label{sec:compressed}
+
+Consider an array ${\mathcal{A}}[1..n]$ of $n$ comparable objects. A \emph{Range
+  Minimum
+  Query}~\cite{1993-SICOMP-RecursiveStarTreeParallelDataStructure-BerkmanVishkin}
+consists of a pair of integers $i$ and $j$ such that
+$1\le i\le j\le n$, and is answered by
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$, the leftmost position of a
+minimum in $\mathcal{A}[i..j]$. Such queries have a wide range of
+applications in various data structures and algorithms, including text
+indexing~\cite{2009-TCS-FasterEntropyBoundedCompressedSuffixTrees-FischerMakinenNavarro},
+pattern
+matching~\cite{2008-STACS-ImprovedAlgorithmsForTheRangeNextValueProblemAndApplications-CrochemoreIliopoulosKubicaRahmanWalen},
+and more elaborate kinds of range
+queries~\cite{2004-ISAAC-OnTheRangeMaximumSumSegmentQueryProblem-ChenChao}.
+
+%%% RMQs in presence of Repetitions.
+
+If the array $A$ is formed by repeated elements, then it is possible
+to define more specific queries related to the
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$ operation. The \emph{Range
+  Leftmost Minimun Queries} (\texttt{RLMinQ}$_{\mathcal{A}}(i,j)$),
+\emph{Range Rightmost Minimun Queries}
+(\texttt{RRMinQ}$_{\mathcal{A}}(i)$) and \emph{Range k-th Minimum
+  Query} (\texttt{RkMinQ}$_{\mathcal{A}}(i,j)$) return, given $m$
+elements of minimum values of ranks $r_1, \dots, r_m$ in the range
+${\mathcal{A}}[i..j]$, $r_1$, $r_m$ and $r_k$, respectively.
+%%% PSVs Similar kind of queries are \emph{Previous Smaller Value}
+\texttt{PSV}$_{\mathcal{A}}(i)$ and \emph{Previous Larger Value}
+\texttt{PLV}$_{\mathcal{A}}(i)$, which return the position of the nearest
+smaller/larger value among ${\mathcal{A}}[1..i]$, by analogy the operations
+\emph{Next Smaller Value} \texttt{NSV}$_{\mathcal{A}}(i)$ and \emph{Next Larger Value}
+\texttt{NLV}$_{\mathcal{A}}(i)$ can be defined.
+
+Fischer~\cite{2010-LATIN-OptimalSuccinctnessForRangeMinimumQueries-Fischer}
+described a non-systematic succinct index (which does not access the
+original data when answering queries) using $2n+o(n)$ bits and
+supporting RMQs in zero accesses to $\mathcal{A}$ and $O(1)$ accesses to the
+index, which can be built in $O(n)$ time.
+
+%%% Multiple Operations
+Gawrychowski and
+Nicholson~\cite{2015-ICALP-OptimalEncodingsForRangeTopKSelectionAndMinMax-GawrychowskiNicholson},
+among other results, gave an index to support \emph{Range Minimum
+  Query} and \emph{Range Maximum Query}
+(\texttt{RMaxQ}$_{\mathcal{A}}(i,j)$) in constant time using
+$3n + o(n)$ bits.
+Fischer~\cite{2011-TCS-CombinedDataStructureForPreviousAndNextSmallerValues-Fischer}
+described a non-systematic succinct index using $2.54n + o(n)$ to
+support \texttt{PSV}$_{\mathcal{A}}(i)$,
+\texttt{NSV}$_{\mathcal{A}}(i)$ and
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$. By combining both approaches, Jo
+and
+Rao~\cite{2015-COCOON-SimultaneousEncodingsForRangeAndNextPreviousLargerSmallerValueQueries-JoRao}
+described encodings that support a wide range of queries: an encodings
+using $3.322n + o(n)$ bit that supports
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RMaxQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RRMinQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RRMaxQ}$_{\mathcal{A}}(i,j)$, \texttt{PSV}$_{\mathcal{A}}(i)$
+and \texttt{PLV}$_{\mathcal{A}}(i)$ in constant time and an encoding
+using $4.585n + o(n)$ bits that supports
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RRMinQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RLMinQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RkMinQ}$_{\mathcal{A}}(i,j)$, \texttt{PSV}$_{\mathcal{A}}(i)$,
+\texttt{NSV}$_{\mathcal{A}}(i)$, \texttt{RMaxQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RRMaxQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RLMaxQ}$_{\mathcal{A}}(i,j)$,
+\texttt{RkMaxQ}$_{\mathcal{A}}(i,j)$, \texttt{PLV}$_{\mathcal{A}}(i)$,
+\texttt{NLV}$_{\mathcal{A}}(i)$ in constant time.
+
+%%% Input Order Compression of RMQs
+In the worst case over all
+possible arrays of $n$ comparable objects, any fully separated index
+requires at least $2n$ bits in order to support such queries.
+% 
+When the array ${\mathcal{A}}$ is composed of $\rho \in o(n)$ runs,
+Barbay et
+al.~\cite{2012-TCS-LRMTreesCompressedIndicesAdaptiveSortingAndCompressedPermutations-BarbayFischerNavarro}
+described a systematic compressed index using
+$\lg{n\choose \rho} + o(n)$ bits, that can be computed in
+$n-1+2(\rho-1) \in n+o(n)$ data comparisons and $O(n)$ overall time,
+and supports \texttt{RMinQ}$_{\mathcal{A}}(i,j)$ in $1$ comparison
+within ${\mathcal{A}}$ and $O(1)$ accesses to the index. This
+compressed data structure takes advantage of the order of the elements
+in the input.
+
+Taking advantage of the repetitions in multisets is unlikely to yield
+much better results for \emph{Range Minimum Query} indexes given that,
+from the point of view of \emph{Range Minimum Query} indexes,
+instances varying in repetitions such as $(2,1,3)$ and $(2, 1, 2)$ are
+indistinguishable.
+
+\textbf{\begin{enumerate}
+  \item Is there a compressed index for ${\mathcal{A}}$ that supports a wide range
+of operations which takes advantage of the number and sizes of the
+\emph{runs} that form ${\mathcal{A}}$?
+  \item Is there a compressed index for ${\mathcal{A}}$ that supports a wide range
+of operations which takes advantage of the repetitions in ${\mathcal{A}}$?
+  \item Is there a compressed index for ${\mathcal{A}}$ that supports a wide range
+of operations which takes advantage of the number and sizes of the
+\emph{runs} and the repetitions in ${\mathcal{A}}$ in a synergistic way, so that
+it takes less space on instances where it can take advantage of both
+at the same time?
+  \end{enumerate} }
 
 \section{Maxima Solutions}
 \label{sec:maxima}
