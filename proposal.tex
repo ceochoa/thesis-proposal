@@ -77,7 +77,7 @@ order.
 
 By ``input structure'' we mean algorithms taking advantage of the structure of the instance, for example, taking advantage of the frequencies of the values in a multiset or of the relative positions of the points in a set.
 
-Concerning the {\sc{Sorting}} problem, Munro and
+Concerning the {\sc{Sorting}} problem, as early as 1976, Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
 considered the task of {\sc{Sorting}} a multiset
 $S=\{x_1, \dots, x_n\}$ of $n$ real numbers with $\sigma$ distinct
@@ -133,8 +133,7 @@ and improve upon \textsc{Deferred Data
   Structures} results from Barbay et al.'s~\cite{2016-JDA-NearOptimalOnlineMultiselectionInInternalAndExternalMemory-BarbayGuptaRaoSorenson}
 by adding 3 new measures of difficulty (input order, input structure
 and query order) to the single one previously considered (query
-structure).
-These combinations yield a better
+structure). These combinations yield a better
 understanding of the problems and more efficient solutions which we
 hope to extend to other problems (Section~\ref{sec:compressed},
 Section~\ref{sec:maxima} and Section~\ref{sec:hull}).
@@ -625,7 +624,7 @@ queries performing within
   comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and $r_{q+1}=n$.
 \end{theorem}
 
-Next, we describe three problems susceptibles to combinations of input
+Next, we describe three problems susceptible to combinations of input
 order and input structure techniques.
 
 \section{Compressed Data Structures}
@@ -650,8 +649,8 @@ queries~\cite{2004-ISAAC-OnTheRangeMaximumSumSegmentQueryProblem-ChenChao}.
 If the array $A$ is formed by repeated elements, then it is possible
 to define more specific queries related to the
 \texttt{RMinQ}$_{\mathcal{A}}(i,j)$ operation. The \emph{Range
-  Leftmost Minimun Queries} (\texttt{RLMinQ}$_{\mathcal{A}}(i,j)$),
-\emph{Range Rightmost Minimun Queries}
+  Leftmost Minimum Queries} (\texttt{RLMinQ}$_{\mathcal{A}}(i,j)$),
+\emph{Range Rightmost Minimum Queries}
 (\texttt{RRMinQ}$_{\mathcal{A}}(i)$) and \emph{Range k-th Minimum
   Query} (\texttt{RkMinQ}$_{\mathcal{A}}(i,j)$) return, given $m$
 elements of minimum values of ranks $r_1, \dots, r_m$ in the range
@@ -666,8 +665,9 @@ smaller/larger value among ${\mathcal{A}}[1..i]$, by analogy the operations
 Fischer~\cite{2010-LATIN-OptimalSuccinctnessForRangeMinimumQueries-Fischer}
 described a non-systematic succinct index (which does not access the
 original data when answering queries) using $2n+o(n)$ bits and
-supporting RMQs in zero accesses to $\mathcal{A}$ and $O(1)$ accesses to the
-index, which can be built in $O(n)$ time.
+supporting \texttt{RMinQ}$_{\mathcal{A}}(i,j)$ in zero accesses to
+$\mathcal{A}$ and $O(1)$ accesses to the index, which can be built in
+$O(n)$ time.
 
 %%% Multiple Operations
 Gawrychowski and
@@ -723,6 +723,8 @@ from the point of view of \emph{Range Minimum Query} indexes,
 instances varying in repetitions such as $(2,1,3)$ and $(2, 1, 2)$ are
 indistinguishable.
 
+These results suggest the following questions:
+
 \textbf{\begin{enumerate}
   \item Is there a compressed index for ${\mathcal{A}}$ that supports a wide range
 of operations which takes advantage of the number and sizes of the
@@ -734,10 +736,103 @@ of operations which takes advantage of the number and sizes of the
 \emph{runs} and the repetitions in ${\mathcal{A}}$ in a synergistic way, so that
 it takes less space on instances where it can take advantage of both
 at the same time?
-  \end{enumerate} }
+\end{enumerate}}
+
+We describe next two problems in Computational Geometry suitable to
+synergistic solutions. 
 
 \section{Maxima Solutions}
 \label{sec:maxima}
+
+% Definition of the problem
+
+Give two points $p = (a,b)$ and $q = (x,y)$ in the plane, $p$
+\emph{dominates} $q$ if $a>x$ and $b>y$. Given a set $\mathcal{S}$ of point
+in the plane, a point $p$ is \emph{maximal} if none point in
+$\mathcal{S}$ dominates $p$. The \textsc{Maxima} problem asks to find all maximal
+points in $\mathcal{S}$.
+
+% Input Structure
+% Kirkpatrick and Seidel solutions & Afshani, Barbay and Chan
+
+In 1985, Kirkpatrick and
+Seidel~\cite{1985-SOCG-OutputSizeSensitiveAlgorithmsForFindingMaximalVectors-KirkpatrickSeidel}
+described an output-sensitive algorithm to solve the \textsc{Maxima}
+problem in the plane. They show that the computational complexity of
+the algorithm is within $O(n\log{h}) \subseteq O(n\log{n})$, where $n$ is the size of the
+set $\mathcal{S}$ of input points and $h$ is the size of the set of maximal
+points. Afshani et
+al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
+refined the complexity analysis of this algorithm to within
+$O(n(1+{\cal H}(n_1,\ldots,n_h)))\subseteq O(n(1{+}\log h)) \subseteq
+O(n\log{n})$, where $n_1, \dots, n_h$ are the sizes of a partition of
+$\mathcal{S}$, such that every element of the partition is a singleton
+or can be enclosed by a rectangle whose interior is completely below
+the staircase of the maximal points of $\mathcal{S}$, and
+${\cal H}(n_1,\ldots,n_h)$ has the minimum possible value (minimum
+entropy of the distribution of the points into a certificate of the
+instance). This result takes advantage of the positions of the points
+i.e., the structure of the instance.
+
+% Input Order
+% Monotone subsequence
+
+As far as we know, there are not algorithms that take advantage of the
+order in which the points are given to speed up the computation of the
+maximal set of points. A trivial one arise from the observation that
+the maximal points of a set $\mathcal{S}$ where its elements are
+listed in sorted order in $x$- or $y$-coordinates can be computed in
+linear time. The algorithm identifies runs in the input order of
+$\mathcal{S}$ in linear time. It computes the maximal points of
+each runs in linear time and then merge the staircase of the sets of
+maximal points two by two selecting the two smallest sets at each
+time.
+
+%%% Adaptation from Levcopoulos for Maxima Simple Subchains,
+
+For the \textsc{Convex Hull} computation problem, there is an algorithm
+from Levcopoulos et
+al.~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell}
+that takes advantage of the minimum number of simple subchain into
+which can be divided the input points considered as a polygonal chain
+(see Section~\ref{sec:hull} for details). This algorithm takes
+advantage of the order of the points i.e., the input order. There not
+seems to be an easy extension of this result to the \textsc{Maxima}
+problem.
+
+The \textsc{MultiSelection} problem for MultiSets can be adapted to
+the \textsc{Maxima} problem. Given a set $\mathcal{S}$ of planar
+points and a set $\mathcal{Q}$ of planar points, the
+\textsc{MultiMaxima} problem ask for identifying which points from
+$\mathcal{Q}$ are dominated by points in $\mathcal{S}$. The
+identification of the dominated points in $\mathcal{Q}$ can be seen as
+\texttt{maxima} queries.
+
+% Questions
+
+These results suggest the following questions:
+
+\textbf{\begin{enumerate}
+    %% Input Order Maxima
+  \item Is there algorithms that take advantage of the input order for
+    computing the maximal points in a more complex and efficient way
+    than the previous one?
+    %% Synergistic Maxima
+  \item Is there an algorithm for computing the maximal points which takes the
+    best advantage of both the \emph{input order} and the \emph{input
+      structure} in a synergistic way, so that it performs as good as
+    previously known solutions on all instances, and much better on
+    instances where it can take advantage of both at the same time?
+    %% MultiMaxima
+  \item Is there a MultiMaxima algorithm and a deferred data structure
+    for answering \texttt{maxima} queries which
+    takes the best advantage not only of notions of
+    easiness in the input, but additionally also of notions of
+    easiness in the queries, such as the \emph{query structure} and
+    the \emph{query order}?
+\end{enumerate}}
+
+%% Maxima Deferrped Data Structure
 
 \section{Convex Hull Solutions}
 \label{sec:hull}
