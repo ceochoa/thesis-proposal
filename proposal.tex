@@ -75,12 +75,15 @@ $O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes
 advantage of the order in which the points are given i.e., the input
 order.
 
-By ``input structure'' we mean algorithms taking advantage of the structure of the instance, for example, taking advantage of the frequencies of the values in a multiset or of the relative positions of the points in a set.
+By ``input structure'' we mean algorithms taking advantage of the
+structure of the instance, for example, taking advantage of the
+frequencies of the values in a multiset or of the relative positions
+of the points in a set of planar points.
 
 Concerning the {\sc{Sorting}} problem, as early as 1976, Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
-considered the task of {\sc{Sorting}} a multiset
-$S=\{x_1, \dots, x_n\}$ of $n$ real numbers with $\sigma$ distinct
+considered the task of sorting a multiset
+$\mathcal{M}=\{x_1, \dots, x_n\}$ of $n$ real numbers with $\sigma$ distinct
 values, of multiplicities $m_1, \dots, m_\sigma$ (such that
 $\sum_{i=1}^\sigma {m_i}=n$), respectively. They showed that adding
 counters to various classical algorithms
@@ -90,9 +93,8 @@ counters to various classical algorithms
 \end{INUTILE}
 yields a time complexity within
 $O(n(1+\mathcal{H}(m_1, \dots, m_\sigma))) \subseteq
-O(n(1{+}\log{\sigma})) \subseteq O(n\log{n})$ for {\sc{Sorting}} a
-multiset. This result takes advantage of
-the frequencies of the values i.e., the structure of the instance.
+O(n(1{+}\log{\sigma})) \subseteq O(n\log{n})$ for sorting $\mathcal{M}$. This result takes advantage of the frequencies of the values
+i.e., the structure of the instance.
 
 Considering the problem of computing the {\sc{Convex Hull}}, Kirkpatrick and Seidel~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel} described an algorithm to compute the {\sc{Convex Hull}} of a set of $n$ planar points in time within $O(n(1+\log h))\subseteq O(n\log n)$, where $h$ is the number of vertices in the {\sc{Convex Hull}}.
 \begin{INUTILE}
@@ -151,12 +153,12 @@ takes advantage of distinct features in the input. In Section
 algorithms, which never perform worse than \texttt{MergeSort with
   Counters} and \texttt{Minimal MergeSort}, and perform much better on
 some large classes of instances by taking advantage of both the order
-(local and global) and the structure in the input, in a synergistic
-way. In Section~\ref{sec:multiselect}, we generalize one of the
-algorithm described in Section~\ref{sec:syn-sort} to an offline
-multiselection algorithm that partially sorts a multiset according to
-the set of \texttt{select} queries given as input. In the context
-where the queries arrive one at the time (i.e., online), in
+and the structure in the input, in a synergistic way. In
+Section~\ref{sec:multiselect}, we generalize one of the algorithm
+described in Section~\ref{sec:syn-sort} to an offline multiselection
+algorithm that partially sorts a multiset according to the set of
+\texttt{select} queries given as input. In the context where the
+queries arrive one at the time (i.e., online), in
 Section~\ref{sec:dds} we define two \textsc{Deferred Data Structures}
 for answering online \texttt{rank} and \texttt{select} queries, both
 inspired by the \texttt{MultiSelection} algorithm.
@@ -211,7 +213,7 @@ The algorithm \texttt{MergeSort with Counters} is incomparable with
 the algorithm \texttt{Minimal MergeSort}, in the sense that neither
 one performs always better than the other. Simple modifications and
 combinations of these algorithms do not take full advantage of both
-the order (local and global) and structure in the input
+the order and structure in the input
 (see~\cite{2016-ARXIV-SynergisticSortingAndDeferredDataStructuresOnMultiSets-BarbayOchoaSatty}
 for detailed counter examples).
 
@@ -219,13 +221,13 @@ for detailed counter examples).
 \label{sec:syn-sort}
 
 In the following section we describe two sorting algorithms that take
-the best advantage of both the order (local and global) and structure
+the best advantage of both the order and structure
 in the input all at once when sorting a multiset. The first one is a
 straightforward application of previous results, while the second one
 prepares the ground for the \textsc{MultiSelection} algorithm
 (Section~\ref{sec:multiselect}) and the \textsc{Deferred Data
   Structures} (Section~\ref{sec:dds}), which take
-advantage of the order (local and global) and structure in the data
+advantage of the order and structure in the data
 and of the order and structure in the queries.
 
 \subsubsection{Sorting Algorithm \texttt{DLM
@@ -268,7 +270,12 @@ The time complexity of the \texttt{DLM Union} algorithm is measured in terms of 
 %
 Let $\chi$ be the size of $\pi$.
 %
-If the instance is formed by $\delta$ blocks of sizes $g_1, \dots, g_{\delta}$ such that these blocks induce a partition $\pi$ whose members have values $m_1, \dots, m_{\chi}$, we express the time complexity of \texttt{DLM Union} as within $\Theta(\sum^{\delta}_{i=1}\log g_i + \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
+If the instance is formed by $\delta$ blocks of sizes
+$g_1, \dots, g_{\delta}$ such that these blocks induce a partition
+$\pi$ whose members have values $m_1, \dots, m_{\chi}$, we express the
+time complexity of the algorithm \texttt{DLM Union} as within
+$\Theta(\sum^{\delta}_{i=1}\log g_i +
+\sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
 %
 This time complexity is within a constant factor of the complexity of any other algorithm computing the union of these sorted sets (i.e., the algorithm is instance optimal).
 
@@ -289,7 +296,7 @@ This time complexity is within a constant factor of the complexity of any other 
 
 We adapt the \texttt{DLM Union} algorithm for sorting a multiset.  The
 algorithm \texttt{DLM Sort} detects the runs first through a linear
-scan and then applies the algorithm \texttt{DLM Union}. After than,
+scan and then applies the algorithm \texttt{DLM Union}. After that,
 transforming the output of the union algorithm to yield the sorted
 multiset takes only linear time. The following corollary follows from
 our refined analysis above:
@@ -324,10 +331,7 @@ distinct paradigm, more suitable to such extensions.
 
 Given a multiset $\mathcal{M}$, the algorithm \texttt{Quick Synergy
   Sort} identifies the \emph{runs} in linear time through a scanning
-process. \begin{LONG} As indicated by its name, the algorithm is
-  directly inspired by the
-  \texttt{QuickSort}~\cite{1961-CACM-Quicksort-Hoare}
-  algorithm.\end{LONG} It computes a pivot $\mu$, which is the median
+process. It computes a pivot $\mu$, which is the median
 of the set formed by the middle elements of each run, and partitions
 each \emph{run} by $\mu$. This partitioning process takes advantage of
 the fact that the elements in each \emph{run} are already sorted. It
@@ -477,7 +481,7 @@ two \textsc{Deferred Data Structures} for answering online
 
 We describe two \textsc{Deferred Data Structures} that answer a set of \texttt{rank} and \texttt{select} queries arriving one at the time over a multiset $\mathcal{M}$, progressively sorting $\mathcal{M}$.  
 %
-Both data structures take advantage of the order (local and global) and structure in the input, and of the structure in the queries.
+Both data structures take advantage of the order and structure in the input, and of the structure in the queries.
 %
 The first data structure is in the RAM model of computation, at the cost of not taking advantage of the order in which the queries are given. The second data structure is in the comparison model (a more constrained model) but does take advantage of the query order.
 
@@ -526,16 +530,15 @@ $o(\log{n})$~\cite{2002-JCSS-OptimalBoundsForThePredecessorProblemAndRelatedProb
 \end{theorem}
 
 The \textsc{RAM Deferred Data Structure} takes advantage of the
-structure in the queries and of the structure and order (local and
-global) in the input. Changing the order in the \texttt{rank} and
-\texttt{select} queries does not affect the time complexity of the
-\textsc{RAM Deferred Data Structure}. Once the structure
-  identifies the nearest pivots to the left and right of the query
-  positions, the steps of the algorithms are the same as in the
-  offline case (Section~\ref{sec:multiselect}). We
-next describe a deferred data structure taking advantage of the
-structure and order in the queries and of the structure and order
-(local and global) in the input data.
+structure in the queries and of the structure and order in the
+input. Changing the order in the \texttt{rank} and \texttt{select}
+queries does not affect the time complexity of the \textsc{RAM
+  Deferred Data Structure}. Once the structure identifies the nearest
+pivots to the left and right of the query positions, the steps of the
+algorithms are the same as in the offline case
+(Section~\ref{sec:multiselect}). We next describe a deferred data
+structure taking advantage of the structure and order in the queries
+and of the structure and order in the input data.
 
 \subsubsection{Taking Advantage of the Order and Structure in both the Input and the Queries}
 
@@ -646,7 +649,7 @@ queries~\cite{2004-ISAAC-OnTheRangeMaximumSumSegmentQueryProblem-ChenChao}.
 
 %%% RMQs in presence of Repetitions.
 
-If the array $A$ is formed by repeated elements, then it is possible
+If the array $\mathcal{A}$ is formed by repeated elements, then it is possible
 to define more specific queries related to the
 \texttt{RMinQ}$_{\mathcal{A}}(i,j)$ operation. The \emph{Range
   Leftmost Minimum Queries} (\texttt{RLMinQ}$_{\mathcal{A}}(i,j)$),
@@ -655,7 +658,8 @@ to define more specific queries related to the
   Query} (\texttt{RkMinQ}$_{\mathcal{A}}(i,j)$) return, given $m$
 elements of minimum values of ranks $r_1, \dots, r_m$ in the range
 ${\mathcal{A}}[i..j]$, $r_1$, $r_m$ and $r_k$, respectively.
-%%% PSVs Similar kind of queries are \emph{Previous Smaller Value}
+%%% PSVs
+Similar kind of queries are \emph{Previous Smaller Value}
 \texttt{PSV}$_{\mathcal{A}}(i)$ and \emph{Previous Larger Value}
 \texttt{PLV}$_{\mathcal{A}}(i)$, which return the position of the nearest
 smaller/larger value among ${\mathcal{A}}[1..i]$, by analogy the operations
@@ -680,7 +684,7 @@ Fischer~\cite{2011-TCS-CombinedDataStructureForPreviousAndNextSmallerValues-Fisc
 described a non-systematic succinct index using $2.54n + o(n)$ to
 support \texttt{PSV}$_{\mathcal{A}}(i)$,
 \texttt{NSV}$_{\mathcal{A}}(i)$ and
-\texttt{RMinQ}$_{\mathcal{A}}(i,j)$. By combining both approaches, Jo
+\texttt{RMinQ}$_{\mathcal{A}}(i,j)$ in constant time. By combining both approaches, Jo
 and
 Rao~\cite{2015-COCOON-SimultaneousEncodingsForRangeAndNextPreviousLargerSmallerValueQueries-JoRao}
 described encodings that support a wide range of queries: an encodings
@@ -758,12 +762,12 @@ points in $\mathcal{S}$.
 In 1985, Kirkpatrick and
 Seidel~\cite{1985-SOCG-OutputSizeSensitiveAlgorithmsForFindingMaximalVectors-KirkpatrickSeidel}
 described an output-sensitive algorithm to solve the \textsc{Maxima}
-problem in the plane. They show that the computational complexity of
+problem in the plane. They show that the time complexity of
 the algorithm is within $O(n\log{h}) \subseteq O(n\log{n})$, where $n$ is the size of the
 set $\mathcal{S}$ of input points and $h$ is the size of the set of maximal
 points. Afshani et
 al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
-refined the complexity analysis of this algorithm to within
+refined the time complexity analysis of this algorithm to within
 $O(n(1+{\cal H}(n_1,\ldots,n_h)))\subseteq O(n(1{+}\log h)) \subseteq
 O(n\log{n})$, where $n_1, \dots, n_h$ are the sizes of a partition of
 $\mathcal{S}$, such that every element of the partition is a singleton
@@ -782,11 +786,13 @@ order in which the points are given to speed up the computation of the
 maximal set of points. A trivial one arise from the observation that
 the maximal points of a set $\mathcal{S}$ where its elements are
 listed in sorted order in $x$- or $y$-coordinates can be computed in
-linear time. The algorithm identifies runs in the input order of
-$\mathcal{S}$ in linear time. It computes the maximal points of
-each runs in linear time and then merge the staircase of the sets of
-maximal points two by two selecting the two smallest sets at each
-time.
+linear time. The algorithm identifies runs (by $x$- or
+$y$-coordinates) in the input order of $\mathcal{S}$ in linear
+time. It computes the maximal points of each runs in linear time and
+then merge the staircase of the sets of maximal points two by two
+selecting the two smallest sets at each time. The merging
+process of two sets of maximal points is linear if the maximal points
+in both sets are sorted by $x$-coordinates. 
 
 %%% Adaptation from Levcopoulos for Maxima Simple Subchains,
 
@@ -800,13 +806,20 @@ advantage of the order of the points i.e., the input order. There not
 seems to be an easy extension of this result to the \textsc{Maxima}
 problem.
 
-The \textsc{MultiSelection} problem for MultiSets can be adapted to
+The \textsc{MultiSelection} problem for multisets can be adapted to
 the \textsc{Maxima} problem. Given a set $\mathcal{S}$ of planar
 points and a set $\mathcal{Q}$ of planar points, the
 \textsc{MultiMaxima} problem ask for identifying which points from
 $\mathcal{Q}$ are dominated by points in $\mathcal{S}$. The
 identification of the dominated points in $\mathcal{Q}$ can be seen as
 \texttt{maxima} queries.
+
+Karp et al.~\cite{1988-SIAM-DeferredDataStructuring-KarpMotwaniRaghavan}
+defined the first deferred data structure not only to support
+\texttt{rank} and \texttt{select} queries on multisets, but also to
+support online queries in a deferred way on \textsc{Convex Hull} in
+two dimensions and online \textsc{Maxima} queries on sets of
+multi-dimensional vectors.
 
 % Questions
 
@@ -823,7 +836,7 @@ These results suggest the following questions:
       structure} in a synergistic way, so that it performs as good as
     previously known solutions on all instances, and much better on
     instances where it can take advantage of both at the same time?
-    %% MultiMaxima
+    %% MultiMaxima and Deferred Data Structure
   \item Is there a MultiMaxima algorithm and a deferred data structure
     for answering \texttt{maxima} queries which
     takes the best advantage not only of notions of
@@ -832,15 +845,56 @@ These results suggest the following questions:
     the \emph{query order}?
 \end{enumerate}}
 
-%% Maxima Deferrped Data Structure
+The state of the art of the \textsc{Convex Hull} computation problem
+is similar to \textsc{Maxima} problem.
 
 \section{Convex Hull Solutions}
 \label{sec:hull}
 
-We improve the analysis of this algorithm including not only the
-minimum number of simple subchain into which the polygonal chain can
-be partitioned but also their sizes.
+Kirkpatrick and Seidel~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel} described an algorithm to compute the {\sc{Convex Hull}} of a set of $n$ planar points in time within $O(n(1+\log h))\subseteq O(n\log n)$, where $h$ is the number of vertices in the {\sc{Convex Hull}}. The algorithm relies on a variation of the divide-and-conquer paradigm, which they call the ``Marriage-Before-Conquest'' principle.
+Afshani et al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan} refined the complexity analysis of this algorithm to within $O(n(1+{\cal H}(n_1,\ldots,n_h)))\subseteq O(n(1{+}\log h)) \subseteq O(n\log{n})$, where $n_1, \dots, n_h$ are the sizes of a partition of the input, such that every element of the partition is a singleton or can be enclosed by a triangle whose interior is completely below the upper hull of the set, and ${\cal H}(n_1,\ldots,n_h)$ has the minimum possible value (minimum entropy of the distribution of the points into a certificate of the instance). This result takes advantage of the positions of the points i.e., the structure of the instance.
 
+Levcopoulos et
+al.~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell}
+described a divide-and-conquer algorithm for computing the {\sc{Convex
+    Hull}} of a polygonal chain. The algorithm is based in the fact
+that the {\sc{Convex Hull}} of a simple chain can be computed in
+linear time, and that deciding whether a given chain is simple can be
+done in linear time. They measured the complexity of this algorithm in
+terms of the minimum number of simple subchains $\kappa$ into which
+the chain can be cut. They showed that the time complexity of this
+algorithm is within $O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$.
+%
+This result takes advantage of the order in which the points are given i.e., the input order.
+
+We improve the analysis of the Levcopoulos et al.'s algorithm including
+not only the minimum number of simple subchain into which the
+polygonal chain can be partitioned but also their sizes. If the input
+can be divided into $\kappa$ simple subchains of sizes
+$n_1, \dots, n_{\kappa}$ then the algorithm has a time
+complexity within
+$O(n(1+\mathcal{H}(n_1, \dots, n_{\kappa}))) \subseteq
+O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$.
+
+Similar questions to \textsc{Maxima} problem can be ask about
+\textsc{Convex Hull} problem:
+
+\textbf{\begin{enumerate}
+    %% Synergistic Convex Hull
+  \item Is there an algorithm for computing the Convex Hull of a set
+    of points which takes the best advantage of both the \emph{input
+      order} and the \emph{input structure} in a synergistic way, so
+    that it performs as good as previously known solutions on all
+    instances, and much better on instances where it can take
+    advantage of both at the same time?
+    %% MultiConvexHull and Deferred Data Structure
+  \item Is there a MultiConvexHull algorithm and a deferred data structure
+    for answering \texttt{convex hull} queries which
+    takes the best advantage not only of notions of
+    easiness in the input, but additionally also of notions of
+    easiness in the queries, such as the \emph{query structure} and
+    the \emph{query order}?
+\end{enumerate}}
 
 \section{Conclusion}
 \label{sec:con}
