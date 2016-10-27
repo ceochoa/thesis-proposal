@@ -12,6 +12,7 @@
 \usepackage{algorithm}
 \lstset{frame=shadowbox, rulesepcolor=\color{blue}}
 \usepackage{versions}
+\usepackage[T1]{fontenc}
 \excludeversion{INUTILE}
 %\excludeversion{LONG}\excludeversion{VLONG}\includeversion{SHORT}
 \includeversion{LONG}\excludeversion{SHORT}\includeversion{VLONG}
@@ -25,7 +26,7 @@
 \newtheorem{theorem}{Theorem}
 
 \begin{titlepage}
-\title{Thesis proposal: \\Synergistic Analysis of Algorithms and Data Structures.}
+\title{Thesis proposal: \\Synergistic Analysis Techniques\\ for Algorithms and Data Structures.}
 \author{Carlos Ochoa$^{1}$
   \\\\\\\\\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
@@ -39,24 +40,24 @@
 %\doublespacing
 \maketitle
 \begin{abstract}
-  Takaoka (1997) described a sorting algorithm that sorts an array
-  $\mathcal{A}$ optimally taking advantage of the distribution of the
-  sizes of the maximal sorted subblocks that form $\mathcal{A}$. Munro
-  and Spira (1976) described a sorting algorithm that sorts a multiset
-  $\mathcal{M}$ optimally taking advantage of the multiplicities of
-  the distinct elements in $\mathcal{M}$. We classify similar refined
-  analyses results between those focusing on the structure of the
-  instance, such as Munro and Spira (1976), versus those focusing on
-  the order in which the input is given, such as Takaoka (1997). We
-  develop new techniques in order to further refine this approach and
-  to take advantage all at once of the structure and the order in the
-  input for the \textsc{Sorting} problem. These new algorithms perform
-  much better on large classes of instances, while performing always
+  Existing Adaptive Sorting algorithms can be partitioned between
+  those taking advantage of the input structure and those taking
+  advantage of the input order: Munro and Spira (1976) described a
+  sorting algorithm that sorts a multiset $\mathcal{M}$ optimally
+  taking advantage of the multiplicities of the distinct elements in
+  $\mathcal{M}$ (i.e., input structure) and Takaoka (1997) described a
+  sorting algorithm that sorts an array $\mathcal{A}$ optimally taking
+  advantage of the distribution of the sizes of the maximal sorted
+  subblocks that form $\mathcal{A}$ (i.e., input order). We develop new
+  techniques in order to further refine this approach and to take
+  advantage all at once of the structure and the order in the input
+  for the \textsc{Sorting} problem. These new algorithms perform much
+  better on large classes of instances, while performing always
   asymptotically as good as previous solutions. We extend this
   analysis to more complex problem like \textsc{MultiSelection} and
   \textsc{Deferred Data Structure}, which further take advantage of
-  features in the queries, and review other potential problems suitable
-  for this kind of extension.
+  features in the sequence of queries, and review other potential problems
+  suitable for this kind of extension.
 \end{abstract}
 \clearpage
 

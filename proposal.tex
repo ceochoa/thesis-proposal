@@ -17,30 +17,30 @@ Such a variety of results has motivated various tentative to classify
 them, in the context of NP-hard problems with a theory of Fixed
 Parameter
 Tractability~\cite{2006-BOOK-ParameterizedComplexityTheory-FlumGrohe},
-and in the context of sorting in the comparison model with a theory of
+and in the context of \textsc{Sorting} in the comparison model with a theory of
 reduction between
 parameters~\cite{1995-DAM-AFrameworkForAdaptiveSorting-PeterssonMoffat}.
 
 % Examples of Results and Classification in Adaptive Analysis
 
-In the context of ``Adaptive Analysis of Algorithms'', we introduce
-two other perspectives from which to classify algorithms and data
-structures: those taking advantage of the \emph{input order} (e.g.,
-disorder measures for
-\textsc{Sorting}~\cite{1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson,1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood},
-\textsc{Convex Hull}
-algorithms~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell})
+In the context of the ``Adaptive Analysis of Algorithms'', we
+introduce two other perspectives from which to classify algorithms and
+data structures: those taking advantage of the \emph{input order}
+(e.g., disorder measures for \textsc{Sorting}
+permutations~\cite{1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson,1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood},
+decomposition in simple subchains for \textsc{Convex
+  Hull}~\cite{2002-SWAT-AdaptiveAlgorithmsForConstructingConvexHullsAndTriangulationsOfPolygonalChains-LevcopoulosLingasMitchell})
 and those taking advantage of the \emph{input structure} (e.g., output
 sensitive
-algorithms~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel},
-input order oblivious instance
-optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}).
+algorithms~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel}
+and input order oblivious instance
+optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
+both for \textsc{Convex Hull}).
 
 By \emph{input order} we mean algorithms taking advantage of the order
 of the input, for example, taking advantage of the order of the values
 in a sequence of numbers or of the order in which the points are given
 in a polygonal chain.
-
 % input order sorting
 Concerning the \textsc{Sorting} problem, as early as 1973,
 Knuth~\cite{1973-BOOK-TheArtOfComputerProgrammingVol3-Knuth} described
@@ -61,7 +61,6 @@ $\mathcal{H}(r_1, \dots, r_\sigma) =
 \sum_{i=1}^\sigma{\frac{r_i}{n}}\log{\frac{n}{r_i}}$. These results
 take advantage of the order of the values in the input i.e., the input
 order.
-
 % input order convex hull
 Considering the computation of the {\sc{Convex Hull}} in the plane,
 Levcopoulos et
@@ -79,7 +78,7 @@ By ``input structure'' we mean algorithms taking advantage of the
 structure of the instance, for example, taking advantage of the
 frequencies of the values in a multiset or of the relative positions
 of the points in a set of planar points.
-
+% Input structure sorting
 Concerning the {\sc{Sorting}} problem, as early as 1976, Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
 considered the task of sorting a multiset
@@ -95,7 +94,7 @@ yields a time complexity within
 $O(n(1+\mathcal{H}(m_1, \dots, m_\sigma))) \subseteq
 O(n(1{+}\log{\sigma})) \subseteq O(n\log{n})$ for sorting $\mathcal{M}$. This result takes advantage of the frequencies of the values
 i.e., the structure of the instance.
-
+% Input order convex hull
 Considering the problem of computing the {\sc{Convex Hull}}, Kirkpatrick and Seidel~\cite{1986-JCom-TheUltimatePlanarConvexHullAlgorithm-KirkpatrickSeidel} described an algorithm to compute the {\sc{Convex Hull}} of a set of $n$ planar points in time within $O(n(1+\log h))\subseteq O(n\log n)$, where $h$ is the number of vertices in the {\sc{Convex Hull}}.
 \begin{INUTILE}
   The algorithm relies on a variation of the divide-and-conquer
@@ -106,17 +105,18 @@ Afshani et al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayC
 
 % Hypothesis
 
-\paragraph{Hypothesis: Is it possible to combine both categories of
+\paragraph{Hypothesis:}~\\ Is it possible to combine both categories of
 techniques into a single algorithm taking advantage of the input order
-and structure in a synergistic way?}~\\
+and structure in a synergistic way?~\\
 
 % Conclusion
 
 Through the study of the sorting of multisets according to the
 potential ``easiness'' in both the order and the values in the
 multiset, in Section~\ref{sec:syn-sort} we show an example of the
-difficulty of combining both into a single hybrid algorithmic
-technique. This improves upon both algorithms from Munro and
+difficulty of combining both into a single hybrid synergistic algorithmic
+technique. 
+This improves upon both algorithms from Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and
 Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}.
 %
@@ -137,8 +137,7 @@ by adding 3 new measures of difficulty (input order, input structure
 and query order) to the single one previously considered (query
 structure). These combinations yield a better
 understanding of the problems and more efficient solutions which we
-hope to extend to other problems (Section~\ref{sec:compressed},
-Section~\ref{sec:maxima} and Section~\ref{sec:hull}).
+hope to extend to other problems (described in Sections~\ref{sec:compressed},~\ref{sec:maxima} and~\ref{sec:hull}).
 
 \section{Sorting Solutions}
 \label{sec:sort}
@@ -147,10 +146,10 @@ We review in Section~\ref{sec:back} the algorithms \texttt{MergeSort
   with Counters} described by Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and
 \texttt{Minimal MergeSort} described by
-Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}, each
+Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}, which each
 takes advantage of distinct features in the input. In Section
 \ref{sec:syn-sort}, we describe two synergistic \textsc{Sorting}
-algorithms, which never perform worse than \texttt{MergeSort with
+algorithms, which never perform worse than a constant factor than \texttt{MergeSort with
   Counters} and \texttt{Minimal MergeSort}, and perform much better on
 some large classes of instances by taking advantage of both the order
 and the structure in the input, in a synergistic way. In
@@ -266,16 +265,31 @@ computes the union of $\rho$ sorted sets.
 \end{SHORT}
 \begin{LONG}
   
-The time complexity of the \texttt{DLM Union} algorithm is measured in terms of the number and sizes of blocks of consecutive elements in the sets that are also consecutive in the sorted union (see Figure~\ref{fig:instance} where it is depicted an instance of the \textsc{Set Union} problem); the sizes of these blocks are referred to as \emph{gaps} in the analysis of the algorithm.\end{LONG} These blocks induce a partition $\pi$ of the output into intervals such that any singleton corresponds to a value that has multiplicity greater than $1$ in the input, and each other interval corresponds to a block as defined above. Each member $i$ of $\pi$ has a value $m_i$ associated with it: if the member $i$ of $\pi$ is a block, then $m_i$ is $1$, otherwise, if the member $i$ of $\pi$ is a singleton corresponding to a value of multiplicity $q$, then $m_i$ is $q$.
+The time complexity of the \texttt{DLM Union} algorithm is measured in
+terms of the number and sizes of blocks of consecutive elements in the
+sets that are also consecutive in the sorted union (see
+Figure~\ref{fig:instance} where it is depicted an instance of the
+\textsc{Set Union} problem); the sizes of these blocks are referred to
+as \emph{gaps} in the analysis of the algorithm.\end{LONG}
+\begin{INUTILE}
+  These blocks induce a partition $\pi$ of the output into intervals
+  such that any singleton corresponds to a value that has multiplicity
+  greater than $1$ in the input, and each other interval corresponds
+  to a block as defined above. Each member $i$ of $\pi$ has a value
+  $m_i$ associated with it: if the member $i$ of $\pi$ is a block,
+  then $m_i$ is $1$, otherwise, if the member $i$ of $\pi$ is a
+  singleton corresponding to a value of multiplicity $q$, then $m_i$
+  is $q$.
 %
-Let $\chi$ be the size of $\pi$.
+  Let $\chi$ be the size of $\pi$.
 %
-If the instance is formed by $\delta$ blocks of sizes
-$g_1, \dots, g_{\delta}$ such that these blocks induce a partition
-$\pi$ whose members have values $m_1, \dots, m_{\chi}$, we express the
-time complexity of the algorithm \texttt{DLM Union} as within
-$\Theta(\sum^{\delta}_{i=1}\log g_i +
-\sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
+  If the instance is formed by $\delta$ blocks of sizes
+  $g_1, \dots, g_{\delta}$ such that these blocks induce a partition
+  $\pi$ whose members have values $m_1, \dots, m_{\chi}$, we express
+  the time complexity of the algorithm \texttt{DLM Union} as within
+  $\Theta(\sum^{\delta}_{i=1}\log g_i +
+  \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
+\end{INUTILE}
 %
 This time complexity is within a constant factor of the complexity of any other algorithm computing the union of these sorted sets (i.e., the algorithm is instance optimal).
 
@@ -285,12 +299,11 @@ This time complexity is within a constant factor of the complexity of any other 
 \end{minipage}\hfill
 \begin{minipage}[c]{.45\textwidth}
   \captionof{figure}{An instance of the \textsc{Set Union} problem
-    with $\rho=3$ sorted sets. In each set, the entry $\mathcal{A}[i]$ is
-    represented by a point of $x$-coordinate $\mathcal{A}[i]$. The blocks
-    that form the sets are noted. The blocks $g_4,g_5$ and $g_6$ are of
-    size 1 because they correspond to elements of equal value and they
-    induce the $4$-th member of the partition $\pi$ with value $m_4$
-    equals $3$. The vertical bars separate the members of $\pi$.}
+    with $\rho=3$ sorted sets. In each set, the entry $\mathcal{A}[i]$
+    is represented by a point of $x$-coordinate $\mathcal{A}[i]$. The
+    blocks that form the sets are noted. The blocks $g_4,g_5$ and
+    $g_6$ are of size 1 because they correspond to elements of equal
+    value.}
   \label{fig:instance}
 \end{minipage}
 
@@ -298,23 +311,27 @@ We adapt the \texttt{DLM Union} algorithm for sorting a multiset.  The
 algorithm \texttt{DLM Sort} detects the runs first through a linear
 scan and then applies the algorithm \texttt{DLM Union}. After that,
 transforming the output of the union algorithm to yield the sorted
-multiset takes only linear time. The following corollary follows from
+multiset takes only linear time.
+
+\begin{INUTILE}
+The following corollary follows from
 our refined analysis above:
 
-\begin{corollary}
-  Given a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
-  $\delta$ blocks of sizes $g_1, \dots, g_{\delta}$ such that these
-  blocks induce a partition $\pi$ of size $\chi$ of the output whose
-  members have values $m_1, \dots, m_{\chi}$, the algorithm {\tt{DLM Sort}} performs
-  within
-  $O(n + \sum^{\delta}_{i=1}\log g_i +
-  \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$ data comparisons. This
-  number of comparisons is optimal in the worst case over multisets of
-  size $n$ formed by $\rho$ runs and $\delta$ blocks of sizes
-  $g_1, \dots, g_{\delta}$ such that these blocks induce a partition
-  $\pi$ of size $\chi$ of the output whose members have values
-  $m_1, \dots, m_{\chi}$.
-\end{corollary}
+  \begin{corollary}
+    Given a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs
+    and $\delta$ blocks of sizes $g_1, \dots, g_{\delta}$ such that
+    these blocks induce a partition $\pi$ of size $\chi$ of the output
+    whose members have values $m_1, \dots, m_{\chi}$, the algorithm
+    {\tt{DLM Sort}} performs within
+    $O(n + \sum^{\delta}_{i=1}\log g_i +
+    \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$ data comparisons. This
+    number of comparisons is optimal in the worst case over multisets
+    of size $n$ formed by $\rho$ runs and $\delta$ blocks of sizes
+    $g_1, \dots, g_{\delta}$ such that these blocks induce a partition
+    $\pi$ of size $\chi$ of the output whose members have values
+    $m_1, \dots, m_{\chi}$.
+  \end{corollary}
+\end{INUTILE}
 
 While the algorithm \texttt{DLM Sort} sorts multisets taking the best
 advantage of both the \emph{input order} and the \emph{input
@@ -379,20 +396,22 @@ The number of data comparisons performed by the algorithm
 of data comparisons performed by the algorithm \texttt{DLM Sort}
 described in the previous section.
 
-\begin{theorem}
-  Let $\mathcal{M}$ be a multiset of size $n$ formed by $\rho$ runs
-  and $\delta$ blocks of sizes $g_1, \dots, g_{\delta}$ such that
-  these blocks induce a partition $\pi$ of the output of size $\chi$
-  whose members have values $m_1, \dots, m_{\chi}$. The algorithm
-  \texttt{Quick Synergy Sort} performs within
-  $O(n + \sum^{\delta}_{i=1} \log g_i +
-  \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$ data comparisons on
-  $\mathcal{M}$. This number of comparisons is optimal in the worst
-  case over multisets of size $n$ formed by $\rho$ runs and $\delta$
-  blocks of sizes $g_1, \dots, g_{\delta}$ such that these blocks
-  induce a partition $\pi$ of size $\chi$ of the output whose members
-  have values $m_1, \dots, m_{\chi}$.
-\end{theorem}
+\begin{INUTILE}
+  \begin{theorem}
+    Let $\mathcal{M}$ be a multiset of size $n$ formed by $\rho$ runs
+    and $\delta$ blocks of sizes $g_1, \dots, g_{\delta}$ such that
+    these blocks induce a partition $\pi$ of the output of size $\chi$
+    whose members have values $m_1, \dots, m_{\chi}$. The algorithm
+    \texttt{Quick Synergy Sort} performs within
+    $O(n + \sum^{\delta}_{i=1} \log g_i +
+    \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$ data comparisons on
+    $\mathcal{M}$. This number of comparisons is optimal in the worst
+    case over multisets of size $n$ formed by $\rho$ runs and $\delta$
+    blocks of sizes $g_1, \dots, g_{\delta}$ such that these blocks
+    induce a partition $\pi$ of size $\chi$ of the output whose
+    members have values $m_1, \dots, m_{\chi}$.
+  \end{theorem}
+\end{INUTILE}
 
 Next, we generalize the algorithm \texttt{Quick Synergy Sort} to an
 offline multiselection algorithm that partially sorts a multiset according to the set
@@ -417,32 +436,41 @@ Algorithm~\ref{alg:qss} for the definitions of $\max_\ell$ and
 $\min_r$). It then recurses on both sides.
 
 We extend the notion of blocks to the context of partial sorting.
-
-\begin{definition}[Pivot Blocks]
-  Given a multiset $\mathcal{M}$ formed by $\rho$ runs and $\delta$
-  blocks. The ``\emph{pivot blocks}'' are the blocks of $\mathcal{M}$
-  that contain the pivots and the elements of value equals to the
-  pivots during the steps of the algorithm \texttt{Quick Synergy
-    MultiSelection}.
-\end{definition}
-
-In each run, between the pivot blocks and the insertion ranks of the
-pivots, there are consecutive blocks that the algorithm \texttt{Quick Synergy
-  MultiSelection} has not identified as separated blocks, because
-no doubling searches occurred inside them.
+\begin{INUTILE}
+  \begin{definition}[Pivot Blocks]
+    Given a multiset $\mathcal{M}$ formed by $\rho$ runs and $\delta$
+    blocks. The ``\emph{pivot blocks}'' are the blocks of
+    $\mathcal{M}$ that contain the pivots and the elements of value
+    equals to the pivots during the steps of the algorithm
+    \texttt{Quick Synergy MultiSelection}.
+  \end{definition}
+\end{INUTILE}
+In each run, between the blocks identifies by the algorithm and the
+insertion ranks of the pivots, there are consecutive blocks that the
+algorithm \texttt{Quick Synergy MultiSelection} has not identified as
+separated blocks, because no doubling searches occurred inside them.
+With this idea the results in Section~\ref{sec:syn-sort} can be
+generalized to the more general problem of
+\textsc{MultiSelection}. This refined result improves the analyses of
+\textsc{MultiSelection} algorithms from Dobkin and
+Munro~\cite{1981-JACM-OptimalTimeMinimalSpaceSelectionAlgorithms-DobkinMunro}
+and Kaligosi et
+al.~\cite{2005-ICALP-TowardsOptimalMultopleSelection-KaligosiMehlhornMunroSanders}.
  
-\begin{definition}[Selection Blocks]
-  Given the $i$-th run, formed of various blocks, and $q$
-  \texttt{select} queries, the algorithm \texttt{Quick Synergy
-    MultiSelection} computes $\xi$ pivots in the process of
-  answering the $q$ queries. During the doubling searches,
-  the algorithm \texttt{Quick Synergy MultiSelection} finds the insertion ranks
-  of the $\xi$ pivots inside the $i$-th run. These positions determine
-  a partition of size $\xi+1$ of the $i$-th run where each element of
-  the partition is formed by consecutive blocks or is empty. We call
-  the elements of this partition ``\emph{selection blocks}''. The
-  set of all selection blocks include the set of all pivot blocks.
-\end{definition}
+\begin{INUTILE}
+  \begin{definition}[Selection Blocks]
+    Given the $i$-th run, formed of various blocks, and $q$
+    \texttt{select} queries, the algorithm \texttt{Quick Synergy
+      MultiSelection} computes $\xi$ pivots in the process of
+    answering the $q$ queries. During the doubling searches, the
+    algorithm \texttt{Quick Synergy MultiSelection} finds the
+    insertion ranks of the $\xi$ pivots inside the $i$-th run. These
+    positions determine a partition of size $\xi+1$ of the $i$-th run
+    where each element of the partition is formed by consecutive
+    blocks or is empty. We call the elements of this partition
+    ``\emph{selection blocks}''. The set of all selection blocks
+    include the set of all pivot blocks.
+  \end{definition}
 
 Using these definitions, we generalize the results in Section~\ref{sec:syn-sort} to the more general problem of \textsc{MultiSelection}.
 
@@ -469,8 +497,9 @@ Using these definitions, we generalize the results in Section~\ref{sec:syn-sort}
   comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and
   $r_{q+1}=n$.
 \end{theorem}
+\end{INUTILE}
 
-In the result above, the queries are given all at the same time (i.e.,
+In the \textsc{MultiSelection} problem, the queries are given all at the same time (i.e.,
 offline). In the context where they arrive one at the time (i.e., online), we define
 two \textsc{Deferred Data Structures} for answering online
 \texttt{rank} and \texttt{select} queries, both inspired by the algorithm
@@ -502,32 +531,74 @@ model of computation in order to answer \emph{predecessor and
   successor queries} in time within
 $o(\log{n})$~\cite{2002-JCSS-OptimalBoundsForThePredecessorProblemAndRelatedProblems-BeameFich}.
 
-\begin{theorem}\label{theo:online-ram}
-  Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
-  $\delta$ blocks. The \textsc{RAM Deferred Data Structure} computes
-  $\xi$ pivots in the process of answering $q$ online \texttt{rank}
-  and \texttt{select} queries over $\mathcal{M}$. Let
-  $s_1, \dots, s_{\beta}$ be the sizes of the $\beta$ selection
-  blocks determined by these $\xi$ pivots in all runs. Let
-  $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
-  \begin{LONG}
-    among this selection blocks
-  \end{LONG}
-  corresponding to the values of the $\lambda$ pivots with
-  multiplicity greater than 1, respectively.  Let
-  $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
-  number of runs that have elements with values between the pivots $i$
-  and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let $u$ and
-  $g_1, \dots, g_u $ be the number of \texttt{rank} queries and the
-  sizes of the identified and searched blocks in the process of
-  answering the $u$ \texttt{rank} queries, respectively. The
-  \textsc{RAM Deferred Data Structure} answers these $q$ online
-  \texttt{rank} and \texttt{select} queries in time within
-  $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
-  \sum^{\lambda}_{i=1}m_i\log{m_i}
-  - \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \xi\log\log{n} +
-  u\log{n}\log\log{n} + \sum^{u}_{i=1}\log{g_i})$.
-\end{theorem}
+\begin{INUTILE}
+  \begin{theorem}\label{theo:online-ram}
+    Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$
+    runs and $\delta$ blocks. The \textsc{RAM Deferred Data Structure}
+    computes $\xi$ pivots in the process of answering $q$ online
+    \texttt{rank} and \texttt{select} queries over $\mathcal{M}$. Let
+    $s_1, \dots, s_{\beta}$ be the sizes of the $\beta$ selection
+    blocks determined by these $\xi$ pivots in all runs. Let
+    $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
+    \begin{LONG}
+      among this selection blocks
+    \end{LONG}
+    corresponding to the values of the $\lambda$ pivots with
+    multiplicity greater than 1, respectively.  Let
+    $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
+    number of runs that have elements with values between the pivots
+    $i$ and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let
+    $u$ and $g_1, \dots, g_u $ be the number of \texttt{rank} queries
+    and the sizes of the identified and searched blocks in the process
+    of answering the $u$ \texttt{rank} queries, respectively. The
+    \textsc{RAM Deferred Data Structure} answers these $q$ online
+    \texttt{rank} and \texttt{select} queries in time within
+    $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
+    \sum^{\lambda}_{i=1}m_i\log{m_i} -
+    \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \xi\log\log{n} +
+    u\log{n}\log\log{n} + \sum^{u}_{i=1}\log{g_i})$.
+  \end{theorem}
+\end{INUTILE}
+
+The \textsc{RAM Deferred Data Structure} answers a new
+\texttt{select}$(i)$ query by accessing in $\mathcal{A}$ the query
+position $i$. If $\mathcal{A}[i]$ is 1, then the element $e$ has been
+computed as pivot, and hence the algorithm answers the query in
+constant time by following the position of $e$ inside the block at
+which $e$ belongs. If $\mathcal{A}[i]$ is 0, then the algorithm finds
+the nearest pivots to its left and right using the predecessor and
+successor structure, $\mathcal{B}$. If the position $i$ is inside a
+block to which one of the two nearest pivots belong, then the
+algorithm answers the query and in turn finishes. If not, it then
+applies the same steps as the algorithm \texttt{Quick Synergy
+  MultiSelection} in order to answer the query; it updates the
+bitvector $\mathcal{A}$ and the dynamic predecessor and successor
+structure $\mathcal{B}$ whenever a new pivot is computed; and for each
+pivot $p$ computed, the structure stores the pointers to the insertion
+ranks of $p$ in each run, to the beginning and end of the block $g$ to
+which $p$ belongs, and to the position of $p$ inside $g$.
+
+The \textsc{RAM Deferred Data Structure} answers a new
+\texttt{rank}$(x)$ query by performing a sort of parallel binary
+searches for the value $x$ at each run taking advantage of the pivots
+that have been computed by the algorithm. The algorithm accesses the
+position $\frac{n}{2}$ in $\mathcal{A}$. If $\mathcal{A}[\frac{n}{2}]$
+is 1, then the element $e$ of \texttt{rank} $\frac{n}{2}$ has been
+computed as pivot. Following the pointer to the block $g$ to which $e$
+belongs, the algorithm decides if $x$ is to the right, to the left or
+inside $g$ by performing a constant number of data comparisons. In the
+last case, a binary search for the value $x$ inside $g$ yields the
+answer of the query. If $\mathcal{A}[\frac{n}{2}]$ is 0, then the
+algorithm finds the nearest pivots to the left and right of the
+position $\frac{n}{2}$ using the predecessor and successor structure,
+$\mathcal{B}$. Following the pointers to the blocks that contain these
+pivots the algorithm decides if $x$ is inside one of these blocks, to
+the right of the rightmost block, to the left of the leftmost block,
+or between these two blocks. In the last case, the algorithm applies
+the same steps as the algorithm \texttt{Quick Synergy MultiSelection}
+in order to compute the median $\mu$ of the middles and partitions the
+selection blocks by $\mu$. The algorithm then decides to which side
+$x$ belongs.
 
 The \textsc{RAM Deferred Data Structure} takes advantage of the
 structure in the queries and of the structure and order in the
@@ -564,10 +635,10 @@ implementation supports the insertion of an element $x$ immediately to
 the left or to the right of a finger in \begin{LONG}worst-case\end{LONG} constant
 time.
 
-In the description of the \textsc{RAM Deferred Data Structure} from
-Theorem~\ref{theo:online-ram}, we substitute the dynamic predecessor
-and successor structure $\mathcal{B}$ by a finger search tree
-$\mathcal{F}_{\texttt{select}}$, as described by
+In the description of the \textsc{RAM Deferred Data Structure}, we
+substitute the dynamic predecessor and successor structure
+$\mathcal{B}$ by a finger search tree $\mathcal{F}_{\texttt{select}}$,
+as described by
 Brodal~\cite{1998-SODA-FingerSearchTreesWithConstantInsertionTime-Brodal}. Once
 a block $g$ is identified, every element in $g$ is a valid pivot for
 the rest of the elements in $\mathcal{M}$. In order to capture this
@@ -588,44 +659,53 @@ $\mathcal{M}$ to the beginning and the end of $g$ and in each run to
 the position where the elements of $g$ partition the run. We name this
 structure \textsc{Full-Synergistic Deferred Data Structure}.
 
-\begin{theorem}\label{theo:finger}
-  Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$ runs and
-  $\delta$ blocks. The \textsc{Full-Synergistic Deferred Data
-    Structure} identifies $\gamma$ blocks in the process of answering
-  $q$ online \texttt{rank} and \texttt{select} queries over
-  $\mathcal{M}$ corresponding to elements of \texttt{ranks} $r_1,
-  \dots, r_q$. Let $s_1, \dots, s_{\beta}$ be the sizes of the $\beta$
-  selection blocks determined by the $\gamma$ blocks in all runs.
-  Let
-  $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
-  \begin{LONG}
-    among this selection blocks
-  \end{LONG}
-  corresponding to the values of the $\lambda$ pivots with
-  multiplicity greater than 1, respectively.  Let
-  $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
-  number of runs that have elements with values between the pivots $i$
-  and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let
-  $d_1, \dots, d_{q-1}$ be the sequence where $d_j$ is the number
-  of identified blocks between the block that answers the $j-1$-th
-  query and the one that answers the $j$-th query before starting the
-  steps to answer the $j$-th query, for $j\in[2..q]$. Let $u$ and
-  $g_1, \dots, g_u $ be the number of \texttt{rank} queries and the
-  sizes of the identified and searched blocks in the process of
-  answering the $u$ \texttt{rank} queries, respectively. The
-  \textsc{Full-Synergistic Deferred Data Structure} answers the $q$
-  online
-  \begin{LONG}
-    \texttt{rank} and \texttt{select}
-  \end{LONG}
-queries performing within
-  $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
-  \sum^{\lambda}_{i=1}m_i\log{m_i} -
-  \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \sum^{q-1}_{i=1}\log{d_i} +
-  \sum^{u}_{i=1}\log{g_i}) \subseteq O\left(n\log{n} -
-    \sum^{q}_{i=0}\Delta_i\log{\Delta_i} + q\log{n}\right)$ data
-  comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and $r_{q+1}=n$.
-\end{theorem}
+\begin{INUTILE}
+  \begin{theorem}\label{theo:finger}
+    Consider a multiset $\mathcal{M}$ of size $n$ formed by $\rho$
+    runs and $\delta$ blocks. The \textsc{Full-Synergistic Deferred
+      Data Structure} identifies $\gamma$ blocks in the process of
+    answering $q$ online \texttt{rank} and \texttt{select} queries
+    over $\mathcal{M}$ corresponding to elements of \texttt{ranks}
+    $r_1, \dots, r_q$. Let $s_1, \dots, s_{\beta}$ be the sizes of the
+    $\beta$ selection blocks determined by the $\gamma$ blocks in all
+    runs.  Let $m_1, \dots, m_\lambda$ be the numbers of pivot blocks
+    \begin{LONG}
+      among this selection blocks
+    \end{LONG}
+    corresponding to the values of the $\lambda$ pivots with
+    multiplicity greater than 1, respectively.  Let
+    $\rho_0, \dots, \rho_\xi$ be the sequence where $\rho_i$ is the
+    number of runs that have elements with values between the pivots
+    $i$ and $i+1$ sorted by \texttt{ranks}, for $i\in[1..\xi]$.  Let
+    $d_1, \dots, d_{q-1}$ be the sequence where $d_j$ is the number of
+    identified blocks between the block that answers the $j-1$-th
+    query and the one that answers the $j$-th query before starting
+    the steps to answer the $j$-th query, for $j\in[2..q]$. Let $u$
+    and $g_1, \dots, g_u $ be the number of \texttt{rank} queries and
+    the sizes of the identified and searched blocks in the process of
+    answering the $u$ \texttt{rank} queries, respectively. The
+    \textsc{Full-Synergistic Deferred Data Structure} answers the $q$
+    online
+    \begin{LONG}
+      \texttt{rank} and \texttt{select}
+    \end{LONG}
+    queries performing within
+    $O(n + \sum^{\beta}_{i=1}\log{s_i} + \beta\log{\rho} -
+    \sum^{\lambda}_{i=1}m_i\log{m_i} -
+    \sum^{\xi}_{i=0}\rho_i\log{\rho_i} + \sum^{q-1}_{i=1}\log{d_i} +
+    \sum^{u}_{i=1}\log{g_i}) \subseteq O\left(n\log{n} -
+      \sum^{q}_{i=0}\Delta_i\log{\Delta_i} + q\log{n}\right)$ data
+    comparisons, where $\Delta_i = r_{i+1} - r_i$, $r_0=0$ and
+    $r_{q+1}=n$.
+  \end{theorem}
+\end{INUTILE}
+
+The \textsc{Full-Synergistic Deferred Data Structure} improve upon
+\textsc{Deferred Data Structures} results from Barbay et
+al.'s~\cite{2016-JDA-NearOptimalOnlineMultiselectionInInternalAndExternalMemory-BarbayGuptaRaoSorenson}
+by adding 3 new measures of difficulty (input order, input structure
+and query order) to the single one previously considered (query
+structure).
 
 Next, we describe three problems susceptible to combinations of input
 order and input structure techniques.
@@ -818,7 +898,7 @@ Karp et al.~\cite{1988-SIAM-DeferredDataStructuring-KarpMotwaniRaghavan}
 defined the first deferred data structure not only to support
 \texttt{rank} and \texttt{select} queries on multisets, but also to
 support online queries in a deferred way on \textsc{Convex Hull} in
-two dimensions and online \textsc{Maxima} queries on sets of
+two dimensions and online \texttt{Maxima} queries on sets of
 multi-dimensional vectors.
 
 % Questions
@@ -828,7 +908,7 @@ These results suggest the following questions:
 \textbf{\begin{enumerate}
     %% Input Order Maxima
   \item Is there algorithms that take advantage of the input order for
-    computing the maximal points in a more complex and efficient way
+    computing the maximal points in a more efficient way
     than the previous one?
     %% Synergistic Maxima
   \item Is there an algorithm for computing the maximal points which takes the
@@ -837,8 +917,8 @@ These results suggest the following questions:
     previously known solutions on all instances, and much better on
     instances where it can take advantage of both at the same time?
     %% MultiMaxima and Deferred Data Structure
-  \item Is there a MultiMaxima algorithm and a deferred data structure
-    for answering \texttt{maxima} queries which
+  \item Is there a {\textsc{MultiMaxima}} algorithm and a deferred data structure
+    for answering \texttt{Maxima} queries which
     takes the best advantage not only of notions of
     easiness in the input, but additionally also of notions of
     easiness in the queries, such as the \emph{query structure} and
@@ -888,8 +968,8 @@ Similar questions to \textsc{Maxima} problem can be ask about
     instances, and much better on instances where it can take
     advantage of both at the same time?
     %% MultiConvexHull and Deferred Data Structure
-  \item Is there a MultiConvexHull algorithm and a deferred data structure
-    for answering \texttt{convex hull} queries which
+  \item Is there a \textsc{MultiConvexHull} algorithm and a deferred data structure
+    for answering \texttt{Convex Hull} queries which
     takes the best advantage not only of notions of
     easiness in the input, but additionally also of notions of
     easiness in the queries, such as the \emph{query structure} and
