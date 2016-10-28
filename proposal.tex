@@ -37,7 +37,7 @@ and input order oblivious instance
 optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
 both for \textsc{Convex Hull}).
 
-By \emph{input order} we mean algorithms taking advantage of the order
+By ``\emph{input order}'' we mean algorithms taking advantage of the order
 of the input, for example, taking advantage of the order of the values
 in a sequence of numbers or of the order in which the points are given
 in a polygonal chain.
@@ -74,7 +74,7 @@ $O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes
 advantage of the order in which the points are given i.e., the input
 order.
 
-By ``input structure'' we mean algorithms taking advantage of the
+By ``\emph{input structure}'' we mean algorithms taking advantage of the
 structure of the instance, for example, taking advantage of the
 frequencies of the values in a multiset or of the relative positions
 of the points in a set of planar points.
@@ -235,42 +235,15 @@ and of the order and structure in the queries.
 
 In 2000, Demaine et
 al.~\cite{2000-SODA-AdaptiveSetIntersectionsUnionsAndDifferences-DemaineLopezOrtizMunro}
-described the algorithm \texttt{DLM Union}, an instance optimal algorithm that
-computes the union of $\rho$ sorted sets.
-\begin{LONG}
-  It inserts the smallest element of each set in a heap. At each step,
-  it deletes from the heap all the elements whose values are equal to
-  the minimum value of the heap. If more than one element is deleted,
-  it knows the multiplicity of this value in the union of the sets. It
-  then adds to the heap the elements following the elements of minimum
-  value of each set that contained the minimum value. If there is only
-  one minimum element, it extracts from the heap the second minimum
-  and executes a doubling
-  search~\cite{1976-IPL-AnAlmostOptimalAlgorithmForUnboundedSearching-BentleyYao}
-  in the set where the minimum belongs for the value of the second
-  minimum. Once it finds the insertion rank $r$ of the second minimum
-  (i.e., number of elements smaller than the second minimum in the set
-  that contains the minimum), it also knows that the multiplicity of
-  all elements whose positions are before $r$ in the set that contain
-  the minimum are 1 in the union of the $\rho$ sets. These
-    elements are discarded from future iterations of the
-    algorithm. The process is repeated until all elements
-  are discarded.
-\end{LONG}\begin{SHORT}The algorithm scans the sets from left to right identifying blocks of
-  consecutive elements in the sets that are also consecutive in the
-  sorted union (see Figure~\ref{fig:instance} for a graphical
-  representation of such a decomposition on a particular
-  instance of the \textsc{Set Union} problem). In a minor way we refine their analysis as follow:
-  
-\end{SHORT}
-\begin{LONG}
-  
-The time complexity of the \texttt{DLM Union} algorithm is measured in
-terms of the number and sizes of blocks of consecutive elements in the
-sets that are also consecutive in the sorted union (see
+described the algorithm \texttt{DLM Union}, an instance optimal
+algorithm that computes the union of $\rho$ sorted sets.  The
+algorithm scans the sets from left to right identifying blocks of
+consecutive elements in the sets that are also consecutive in the
+sorted union. The time complexity of the \texttt{DLM Union} algorithm
+is measured in terms of the number and sizes of these blocks (see
 Figure~\ref{fig:instance} where it is depicted an instance of the
 \textsc{Set Union} problem); the sizes of these blocks are referred to
-as \emph{gaps} in the analysis of the algorithm.\end{LONG}
+as \emph{gaps} in the analysis of the algorithm.
 \begin{INUTILE}
   These blocks induce a partition $\pi$ of the output into intervals
   such that any singleton corresponds to a value that has multiplicity
@@ -291,7 +264,12 @@ as \emph{gaps} in the analysis of the algorithm.\end{LONG}
   \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
 \end{INUTILE}
 %
-This time complexity is within a constant factor of the complexity of any other algorithm computing the union of these sorted sets (i.e., the algorithm is instance optimal).
+Demaine et
+al.~\cite{2000-SODA-AdaptiveSetIntersectionsUnionsAndDifferences-DemaineLopezOrtizMunro}
+showed that the time complexity of the \texttt{DLM Union} algorithm is
+within a constant factor of the complexity of any other algorithm
+computing the union of these sorted sets (i.e., the algorithm is
+instance optimal).
 
 \begin{minipage}[c]{.45\textwidth}
   \centering
@@ -356,12 +334,13 @@ then recurses on the elements smaller than $\mu$ and on the elements
 greater than $\mu$. (See Algorithm~\ref{alg:qss} for a more formal
 description).
 
-\begin{definition}[Median of the middles]
-  Given a multiset $\mathcal{M}$ formed by runs, the ``\emph{median of
-    the middles}'' is the median element of the set formed by the
-  middle elements of each run.
-\end{definition}
-
+\begin{INUTILE}
+  \begin{definition}[Median of the middles]
+    Given a multiset $\mathcal{M}$ formed by runs, the ``\emph{median
+      of the middles}'' is the median element of the set formed by the
+    middle elements of each run.
+  \end{definition}
+\end{INUTILE}
 \begin{algorithm} % enter the algorithm environment
   \caption{\texttt{Quick Synergy Sort}} % give the algorithm a caption
   \label{alg:qss} % and a label for \ref{} commands later in the document
@@ -394,7 +373,14 @@ description).
 The number of data comparisons performed by the algorithm
 \texttt{Quick Synergy Sort} is asymptotically the same as the number
 of data comparisons performed by the algorithm \texttt{DLM Sort}
-described in the previous section.
+described in the previous section. Consequently, \texttt{Quick
+  Synergy Sort} takes the best advantage of both the \emph{input order} and
+the \emph{input structure} in a synergistic way.
+
+Both algorithms \texttt{DLM Sort} and \texttt{Quick Synergy Sort}
+perform much better than \texttt{MergeSort with Counters} and
+\texttt{Minimal MergeSort} on large classes of instances, while
+performing always asymptotically as good as them.
 
 \begin{INUTILE}
   \begin{theorem}
@@ -562,43 +548,29 @@ $o(\log{n})$~\cite{2002-JCSS-OptimalBoundsForThePredecessorProblemAndRelatedProb
 
 The \textsc{RAM Deferred Data Structure} answers a new
 \texttt{select}$(i)$ query by accessing in $\mathcal{A}$ the query
-position $i$. If $\mathcal{A}[i]$ is 1, then the element $e$ has been
-computed as pivot, and hence the algorithm answers the query in
-constant time by following the position of $e$ inside the block at
-which $e$ belongs. If $\mathcal{A}[i]$ is 0, then the algorithm finds
+position $i$ to decide if the pivot was already computed. If not it finds
 the nearest pivots to its left and right using the predecessor and
-successor structure, $\mathcal{B}$. If the position $i$ is inside a
-block to which one of the two nearest pivots belong, then the
-algorithm answers the query and in turn finishes. If not, it then
+successor structure, $\mathcal{B}$. It then
 applies the same steps as the algorithm \texttt{Quick Synergy
-  MultiSelection} in order to answer the query; it updates the
+  MultiSelection} in order to answer the query. It updates the
 bitvector $\mathcal{A}$ and the dynamic predecessor and successor
-structure $\mathcal{B}$ whenever a new pivot is computed; and for each
-pivot $p$ computed, the structure stores the pointers to the insertion
-ranks of $p$ in each run, to the beginning and end of the block $g$ to
-which $p$ belongs, and to the position of $p$ inside $g$.
+structure $\mathcal{B}$ whenever a new pivot is computed.
 
 The \textsc{RAM Deferred Data Structure} answers a new
 \texttt{rank}$(x)$ query by performing a sort of parallel binary
 searches for the value $x$ at each run taking advantage of the pivots
 that have been computed by the algorithm. The algorithm accesses the
-position $\frac{n}{2}$ in $\mathcal{A}$. If $\mathcal{A}[\frac{n}{2}]$
-is 1, then the element $e$ of \texttt{rank} $\frac{n}{2}$ has been
-computed as pivot. Following the pointer to the block $g$ to which $e$
-belongs, the algorithm decides if $x$ is to the right, to the left or
-inside $g$ by performing a constant number of data comparisons. In the
-last case, a binary search for the value $x$ inside $g$ yields the
-answer of the query. If $\mathcal{A}[\frac{n}{2}]$ is 0, then the
-algorithm finds the nearest pivots to the left and right of the
-position $\frac{n}{2}$ using the predecessor and successor structure,
-$\mathcal{B}$. Following the pointers to the blocks that contain these
-pivots the algorithm decides if $x$ is inside one of these blocks, to
-the right of the rightmost block, to the left of the leftmost block,
-or between these two blocks. In the last case, the algorithm applies
-the same steps as the algorithm \texttt{Quick Synergy MultiSelection}
-in order to compute the median $\mu$ of the middles and partitions the
-selection blocks by $\mu$. The algorithm then decides to which side
-$x$ belongs.
+position $\frac{n}{2}$ in $\mathcal{A}$ to decide if the pivot was
+already computed. If not, then it finds the nearest
+pivots to the left and right of the position $\frac{n}{2}$ using the
+predecessor and successor structure, $\mathcal{B}$. Following the
+pointers to the blocks that contain these pivots the algorithm decides
+if $x$ is inside one of these blocks, to the right of the rightmost
+block, to the left of the leftmost block, or between these two
+blocks. In the last case, the algorithm applies the same steps as the
+algorithm \texttt{Quick Synergy MultiSelection} in order to compute
+the median $\mu$ of the middles and partitions the runs by
+$\mu$. The algorithm then decides to which side $x$ belongs.
 
 The \textsc{RAM Deferred Data Structure} takes advantage of the
 structure in the queries and of the structure and order in the
@@ -609,7 +581,7 @@ pivots to the left and right of the query positions, the steps of the
 algorithms are the same as in the offline case
 (Section~\ref{sec:multiselect}). We next describe a deferred data
 structure taking advantage of the structure and order in the queries
-and of the structure and order in the input data.
+and of the structure and order in the data.
 
 \subsubsection{Taking Advantage of the Order and Structure in both the Input and the Queries}
 
@@ -623,17 +595,7 @@ positions. For that we use a \emph{finger search
 which is a search tree maintaining \emph{fingers} (i.e., pointers) to
 elements in the search tree. Finger search trees support efficient
 updates and searches in the vicinity of the
-fingers. Brodal~\cite{1998-SODA-FingerSearchTreesWithConstantInsertionTime-Brodal}
-described an implementation of finger search trees that
-searches for an element $x$, starting the search at the element given by
-the finger $f$ in time within $O(\log{d})$, where $d$ is the distance
-between $x$ and $f$ in the set (i.e, the difference between
-\texttt{rank}$(x)$ and \texttt{rank}$(f)$ in the set). This operation
-returns a finger to $x$ if $x$ is contained in the set, otherwise a
-finger to the largest element smaller than $x$ in the set. This
-implementation supports the insertion of an element $x$ immediately to
-the left or to the right of a finger in \begin{LONG}worst-case\end{LONG} constant
-time.
+fingers.
 
 In the description of the \textsc{RAM Deferred Data Structure}, we
 substitute the dynamic predecessor and successor structure
@@ -655,8 +617,7 @@ the features in the queries and the input data, the structure needs
 another finger search tree $\mathcal{F}_{\texttt{rank}}$. In
 $\mathcal{F}_{\texttt{rank}}$ the structure stores for each block $g$
 identified, the value of one of the elements in $g$, and pointers in
-$\mathcal{M}$ to the beginning and the end of $g$ and in each run to
-the position where the elements of $g$ partition the run. We name this
+$\mathcal{M}$ to the beginning and the end of $g$. We name this
 structure \textsc{Full-Synergistic Deferred Data Structure}.
 
 \begin{INUTILE}
