@@ -920,7 +920,8 @@ O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$.
 Similar questions to \textsc{Maxima} problem can be ask about
 \textsc{Convex Hull} problem:
 
-\textbf{\begin{enumerate}
+\textbf{
+  \begin{enumerate}
     %% Synergistic Convex Hull
   \item Is there an algorithm for computing the Convex Hull of a set
     of points which takes the best advantage of both the \emph{input
@@ -929,16 +930,44 @@ Similar questions to \textsc{Maxima} problem can be ask about
     instances, and much better on instances where it can take
     advantage of both at the same time?
     %% MultiConvexHull and Deferred Data Structure
-  \item Is there a \textsc{MultiConvexHull} algorithm and a deferred data structure
-    for answering \texttt{Convex Hull} queries which
-    takes the best advantage not only of notions of
-    easiness in the input, but additionally also of notions of
-    easiness in the queries, such as the \emph{query structure} and
-    the \emph{query order}?
-\end{enumerate}}
+  \item Is there a \textsc{MultiConvexHull} algorithm and a deferred
+    data structure for answering \texttt{Convex Hull} queries which
+    takes the best advantage not only of notions of easiness in the
+    input, but additionally also of notions of easiness in the
+    queries, such as the \emph{query structure} and the \emph{query
+      order}?
+  \end{enumerate}}
+
+Next, we conclude with a review of the results that we have submitted
+and those problem in which we are working now. For those problems in
+which we are working now, we describe some preliminary results and we
+explain the plan for developing them.
 
 \section{Conclusion}
 \label{sec:con}
+
+% Intro Synergistic Sorting
+
+The results about Sorting Solutions described in
+Sections~\ref{sec:syn-sort}, \ref{sec:multiselect} and \ref{sec:dds}
+were submitted to the 34th International Symposium on Theoretical
+Aspects of Computer Science (STACS 2017). The article were submitted
+by the author and his tutor in collaboration with Srinivasa Rao Satti
+from the Department of Computer Science and Engineering, Seoul
+National University, South Korea. The author notification will be
+December 12, 2016.
+
+% Maxima
+
+% Input Order Maxima
+
+We are working now in a more efficient description of ``input order''
+based algorithm for the Maxima problem. Next, we list step by step the
+question we are trying to answer.
+
+% Convex Hull
+
+% Compressed Data Structure
 
 We predict that such analysis techniques will take on more importance
 in the future, along with the growth of the block between practical
