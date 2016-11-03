@@ -952,22 +952,55 @@ The results about Sorting Solutions described in
 Sections~\ref{sec:syn-sort}, \ref{sec:multiselect} and \ref{sec:dds}
 were submitted to the 34th International Symposium on Theoretical
 Aspects of Computer Science (STACS 2017). The article were submitted
-by the author and his tutor in collaboration with Srinivasa Rao Satti
+by the author and his advisor in collaboration with Srinivasa Rao Satti
 from the Department of Computer Science and Engineering, Seoul
 National University, South Korea. The author notification will be
 December 12, 2016.
 
 % Maxima
 
-% Input Order Maxima
-
 We are working now in a more efficient description of ``input order''
-based algorithm for the Maxima problem. Next, we list step by step the
-question we are trying to answer.
+based algorithm for the Maxima problem (see Section~\ref{sec:maxima}
+for the description of the problem). Next, we list step by step the
+question we are trying to answer:
+
+\begin{itemize}
+\item It is not possible to compute the \textsc{Maxima} of a simple
+  chain in linear time. This problem can be reduce to the
+  \textsc{Union} problem. It is possible to strengthen the conditions
+  for a simple chain in order to verify if the chain meets the
+  conditions in linear time and to compute its \textsc{Maxima} in
+  linear time?
+\item It is possible to generalize \emph{Shuffled Up-Sequences}
+  (\emph{SUS}) for a sequence of
+  numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
+  (i.e., the minimum number of ascending subsequences into which can
+  be partitioned the given sequence) to the \textsc{Maxima} and
+  \textsc{Convex Hull} problems?
+\item It is possible to generalize \emph{Shuffled Monotone
+    Subsequences} (\emph{SMS}) for a sequence of
+  numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
+  (i.e., the minimum number of monotone (ascending and descending)
+  subsequences into which can be partitioned the given sequence) to
+  the \textsc{Maxima} and \textsc{Convex Hull} problems?
+\end{itemize}
+
+We have solved optimally the \textsc{MultiMaxima} problem taking
+advantage of the structure of the input points and the structure of
+the query points. The next step is to combine this results with input
+order results in a sinergistic way.
 
 % Convex Hull
 
+For the \textsc{Convex Hull} problem we have similar questions
+concerning synergistic solutions.
+
 % Compressed Data Structure
+
+In March and April 2017, the author plans to do an internship in South
+Korea to work with Srinivasa Rao Satti in Synergistic Compressed Data
+Structures (see Section~\ref{sec:compressed} for the description of
+the problem).
 
 We predict that such analysis techniques will take on more importance
 in the future, along with the growth of the block between practical
