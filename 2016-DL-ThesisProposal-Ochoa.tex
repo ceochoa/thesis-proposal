@@ -1,0 +1,77 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[hang,small]{caption}
+\usepackage{setspace}
+\usepackage{algorithmic}%% For the Algorithms.
+\usepackage{algorithm}
+\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
+\usepackage{versions}
+\usepackage[T1]{fontenc}
+\excludeversion{INUTILE}
+%\excludeversion{LONG}\excludeversion{VLONG}\includeversion{SHORT}
+\includeversion{LONG}\excludeversion{SHORT}\includeversion{VLONG}
+\markversion{TODO}
+\markversion{TODOSRINIVAS}
+\excludeversion{TODOSRINIVAS}
+\excludeversion{TODO}
+
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\linespread{1.5}
+
+\begin{titlepage}
+\title{Thesis proposal: \\Synergistic Analysis Techniques\\ for Algorithms and Data Structures.}
+\author{Carlos Ochoa$^{1}$
+  \\\\\\\\\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+  \\Advisor: J\'er\'emy Barbay$^1$\\\\\\\\
+  $^1$ Departamento de Ciencias de la Computaci\'on (DCC),\\ Universidad de Chile, Santiago, Chile.
+}
+\date{\today}
+\newtheorem*{thma}{Proposition}
+\end{titlepage}
+\begin{document}
+%\doublespacing
+\maketitle
+\begin{abstract}
+  Existing Adaptive Sorting algorithms can be partitioned between
+  those taking advantage of the input structure and those taking
+  advantage of the input order: Munro and Spira (1976) described a
+  sorting algorithm that sorts a multiset $\mathcal{M}$ optimally
+  taking advantage of the multiplicities of the distinct elements in
+  $\mathcal{M}$ (i.e., input structure) and Takaoka (1997) described a
+  sorting algorithm that sorts an array $\mathcal{A}$ optimally taking
+  advantage of the distribution of the sizes of the maximal sorted
+  subblocks that form $\mathcal{A}$ (i.e., input order). We develop
+  new techniques in order to further refine this approach and to take
+  advantage all at once of the structure and the order in the input
+  for the \textsc{Sorting} problem. These new algorithms perform much
+  better on large classes of instances, while performing always
+  asymptotically as good as previous solutions. We extend this
+  analysis to more complex problem like \textsc{MultiSelection} and
+  \textsc{Deferred Data Structure} support for \texttt{rank} and
+  \texttt{select} queries in multisets, which further take advantage of
+  features in the sequence of queries, and review other potential
+  problems suitable for this kind of extension such as \textsc{Maxima}
+  and \textsc{Convex Hull} computation.
+\end{abstract}
+\clearpage
+
+\input{proposal}
+
+\bibliographystyle{plain}
+\bibliography{bibliographyDatabaseJeremyBarbay,publicationsJeremyBarbay,addedForThePaper}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
