@@ -1,4 +1,4 @@
- \documentclass[10pt]{article}
+\documentclass[10pt]{article}
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{color}
 \usepackage{listings}
@@ -13,6 +13,7 @@
 \lstset{frame=shadowbox, rulesepcolor=\color{blue}}
 \usepackage{versions}
 \usepackage[T1]{fontenc}
+\usepackage[titletoc,title]{appendix}
 \excludeversion{INUTILE}
 %\excludeversion{LONG}\excludeversion{VLONG}\includeversion{SHORT}
 \includeversion{LONG}\excludeversion{SHORT}\includeversion{VLONG}
@@ -64,6 +65,8 @@
 \clearpage
 
 \input{proposal}
+
+\newpage
 
 \bibliographystyle{plain}
 \bibliography{bibliographyDatabaseJeremyBarbay,publicationsJeremyBarbay,addedForThePaper}

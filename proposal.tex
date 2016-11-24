@@ -138,10 +138,10 @@ of both the input order and structure in a synergistic way.~\\
 
 In Section 2, we start by studying the sorting of multisets according
 to the potential ``easiness'' in both the order and the values in the
-multiset. We show result examples of the difficulty of combining both
+multiset, and show result examples of the difficulty of combining both
 the order and the structure in the input into a single hybrid
-synergistic algorithmic technique.  This improves upon both algorithms
-from Munro and
+synergistic algorithmic technique.  These results improve upon both
+algorithms from Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and
 Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}.
 %
@@ -165,7 +165,7 @@ Sections~\ref{sec:compressed}), the computation of the \textsc{Maxima}
 (described in Section~\ref{sec:maxima}) and \textsc{Convex Hull}
 (described in Section~\ref{sec:hull}) of a set of points in the
 plane. In Section~\ref{sec:con}, we conclude with a review of the
-results that we have already submitted and specify the plan to solve
+results that we have already submitted and describe our plan to solve
 the remaining problems.
 
 \section{Sorting Solutions}
@@ -717,9 +717,9 @@ A natural extension of our synergistic results about \textsc{Sorting},
 design of \textsc{Compressed Data Structures} for multisets supporting
 \texttt{rank} and \texttt{select} operators.
 
-We also consider \textsc{Compressed Data Structures} supporting other
-operators. Consider an array ${\mathcal{A}}[1..n]$ of $n$ comparable
-objects. A \emph{Range Minimum
+We also consider \textsc{Compressed Data Structures} for multiset
+supporting other operators. Consider an array ${\mathcal{A}}[1..n]$ of
+$n$ comparable objects. A \emph{Range Minimum
   Query}~\cite{1993-SICOMP-RecursiveStarTreeParallelDataStructure-BerkmanVishkin}
 consists of a pair of integers $i$ and $j$ such that
 $1\le i\le j\le n$, and is answered by
@@ -1014,30 +1014,33 @@ developing them.
 The results about Sorting Solutions described in
 Sections~\ref{sec:syn-sort}, \ref{sec:multiselect} and \ref{sec:dds}
 were submitted to the 34th International Symposium on Theoretical
-Aspects of Computer Science (STACS 2017). The article were submitted
-by the author and his advisor in collaboration with Srinivasa Rao Satti
-from the Department of Computer Science and Engineering, Seoul
-National University, South Korea. The author notification is scheduled
-for the 12th of December, 2016.
+Aspects of Computer Science (STACS 2017) and already receive positive
+reviews (see the appendix) during the rebuttal period. The article was
+submitted by the author and his advisor in collaboration with
+Srinivasa Rao Satti from the Department of Computer Science and
+Engineering, Seoul National University, South Korea. The author final
+notification is scheduled for the 12th of December, 2016.
 
 % Maxima
 
 We are working now on a more efficient description of ``input order''
-based algorithms for the computation of the \textsc{Maxima} (see
-Section\ref{sec:maxima} for the description of the problem). It is not
-possible to compute the \textsc{Maxima} of a simple chain in linear
-time in the worst case over instances of size $n$. This problem can be
-reduced to the \textsc{Union} problem. We plan to generalize other
-measures of presortedness for the \textsc{Sorting} problem to the
-computation of the \textsc{Maxima} and \textsc{Convex Hull} of a set
-of planar points.
+based algorithms for the computation of the \textsc{Maxima} (described
+in Section~\ref{sec:maxima}). It is not possible to compute the
+\textsc{Maxima} of a simple chain in linear time in the worst case
+over instances of size $n$ because in the algebraic decision tree
+model, this problem can be reduced to the \textsc{Union} problem. We
+plan to generalize other measures of presortedness for the
+\textsc{Sorting} problem to the computation of the \textsc{Maxima} and
+\textsc{Convex Hull} of a set of planar points, and to explore
+synergistic solutions taking advantage of those in conjunction with
+input structure adaptive techniques from Afshani et al.
 
-We are working in a description of an algorithm for computing the \textsc{Union}
-of $k$ \textsc{Maximas}. If we manage to obtain an algorithm that is
-optimal for every instance for the \textsc{Union Maxima} problem, then
-this algorithm yields a synergistic algorithm for the
-computation of the \textsc{Maxima}. The same is valid for the
-computation of the \textsc{Convex Hull} of a set of points in the plane.
+We are working in the computation of the \textsc{Union} of $k$
+\textsc{Maximas}. If we manage to obtain an algorithm that is optimal
+for every instance of the \textsc{Union Maxima} problem, then this
+algorithm will yield a synergistic algorithm for the computation of the
+\textsc{Maxima}. The same is valid for the computation of the
+\textsc{Convex Hull} of a set of points in the plane.
 
 \begin{INUTILE}
   Next, we list the questions that we are trying to answer step by
@@ -1088,6 +1091,143 @@ cases and the worst case over instances of fixed sizes. Furthermore,
 we conjecture that synergistic techniques taking advantage of more
 than one ``easiness'' aspect will be of practical importance if the
 gap between theoretical analysis and practice is to ever be reduced.
+
+\newpage
+
+\begin{appendices}
+
+  \section{Reviews from the Rebuttal Period of STACS}
+
+  \subsection{Review 1}
+
+  The authors look at selection and sorting in multisets in the
+  environment in which one wants to take advantage of runs of sorted
+  elements. The ideas are built on a long history and the paper brings
+  these results into the adaptive/synergistic point of view with
+  interesting advances and techniques.  The work, while not
+  spectacular, is very solid and worthy of presentation at STACS. The
+  problems are certainly understandable to all, and the methods are
+  interesting.  The paper is clearly written and I have very few
+  editorial comments.  In the description of Algorithm 1 Quick Synergy
+  Sort, the appears to be a typo in the line numbered 6. I am not sure
+  what the "o" should be; though the algorithm as a whole is clear.
+  Also, to the best of my knowledge the doubling binary search is
+  first described by Fredman: Two Applications of a Probabilistic
+  Search Technique: Sorting x + y and Building Balanced Search
+  Trees. STOC 1975: 240-244 (see bottom of page 243)
+
+  \subsection{Review 2}
+
+  This article deals with classical algorithms on multisets: sorting
+  and multiple select/rank queries. The authors propose new solutions
+  for these problems that take advantage of some inner structure of
+  the input (either the multiset, the sequence of queries, or both),
+  if any.
+
+  Though the article contains some new combinations of techniques and
+  though it addresses a natural general problem, I evaluate it as a
+  "borderline paper" for STACS, for the main following reasons.
+
+  At some point, there must be a justification for all the parameters
+  that are used in the main statements. Designing an algorithm that
+  performs better when the number of runs is small is completely
+  natural. Designing an algorithm that optimally merges those runs is
+  natural too. But taking into account, for instance, how the runs
+  interlace (the $g_i$'s of Section 2) is a bit puzzling: at some point,
+  one wonders if the algorithm was designed to be efficient with
+  regard to this statistic, or if the statistic was chosen because the
+  algorithm performs well for it (this is an overstatement of
+  course). As the reader goes through the paper, new statistics are
+  taken into account, that are more and more complicated. This results
+  in statements that are both very difficult to read and very
+  difficult to apprehend. The authors really have to give some more
+  motivations for considering all these parameters if they don't want
+  the reader (or the audience) to loose interest quickly.
+
+  I understand that since the proposed algorithms are optimal anyway,
+  this can be seen as a non-issue: the algorithm is faster if the
+  parameters have some good properties, otherwise it performs the best
+  possible. But the notion of optimality is biased by the O notation,
+  so one has to be careful with such statements. Also, since there are
+  other parameters that can be taken into account, why should I use
+  these ones (for sorting algorithms, there are other parameters than
+  the number of runs in the literature, for instance)? The answer
+  could come from practical observations (our algorithms perform
+  better on some benchmark), or from application to other theoretical
+  algorithms (are there some problems in, say, computational geometry
+  yielding multisets for which these algorithms are efficient?).
+
+  Without more motivation, this article could make a good journal
+  paper, as applications of theoretical works can clearly come
+  thereafter, sometimes unexpectedly: but it is not very suitable for
+  a conference with a large scope such as STACS.
+
+  Other short comments:
+  \begin{itemize}
+  \item The authors definitively have to make an example where all
+    the parameters of Theorem 11-13 are given explicitly.
+    
+  \item I must have missed something but it seems to me that
+    $\sum_{i=1}^k \log(g_i)$ is $O(n)$, and therefore I don't understand
+    why this quantity (and the $g_i$'s) appears in the statement of
+    Corollary 1 and Theorem 5.
+    
+  \item Proof of Theorem 11: the proof is hard to follow. I assume it
+    is $\Omega()$ and not $O()$ that is used at the end.
+  \end{itemize}
+  
+  \subsection{Review 3}
+
+  The paper proposed `best of both world' (or `synergistic')
+  algorithms for two related problems.
+
+  First, for the sorting problem, it was known how to independently
+  exploit input order (i.e. when the input has long pre-sorted
+  sequences) and `input structure' (i.e. when the input has many
+  repeated values). In both case previous algorithm were optimally*
+  exploiting either of this property, while the authors exploit
+  optimally both properties at the same time.
+
+  Secondly, similar results are achieved for the online
+  multi-selection problem, exploiting both the structure of gaps in
+  the queried indices and their order. For this problem, the RAM model
+  is assumed.
+
+  The paper is well organized, some algorithms are clearly described,
+  and some proofs are given. I am far from an expert, but the result
+  seems interesting. Maybe they could be considered incremental, but
+  that is to be expected for such an longly studied topic.
+
+  The only issue I have with the paper is Section 2.2:
+
+  \begin{itemize}
+  \item it is made irrelevant by later sections
+    
+  \item the algorithm of that section is not explicited
+    
+  \item its relation to previous work is very unclear: a refined
+    analysis is claimed, but no comparison is given.
+  \end{itemize}
+  
+  My best guess is that the article could do without this section. If
+  the issue is acknowledging previous work and alternative approach,
+  this could just be mentioned, or alternatively dealt more thoroughly
+  in an appendix.
+
+
+  Editorial comments: * By optimal, I assume the author means
+  w.r.t. to lower bounds on the required number of comparison. I guess
+  this is standard, but it could be explicit.
+
+  \begin{itemize}
+  \item Corollary 1: With no prior theorem or lemma, it is unusual
+    to call this a corollary.
+   
+  \item Several statements are very long (Eg, Cor. 8), maybe it is a
+    bit inherent to the question at hand, but I'm sure an effort can
+    be made.
+  \end{itemize}
+\end{appendices}
 
 %%% Local Variables:
 %%% mode: latex
