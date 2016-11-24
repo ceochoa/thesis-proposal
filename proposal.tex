@@ -3,18 +3,19 @@
 
 % Intro to Adaptive Analysis
 
-The computational complexity of most problems is studied in the worst
-case over instances of fixed size $n$, for $n$ asymptotically tending
-to infinity. This approach was refined in many ways, but most notably
-for NP-difficult problems under the term ``parameterized
-complexity''~\cite{2006-BOOK-ParameterizedComplexityTheory-FlumGrohe},
+The computational complexity of most problems is most often studied in
+the worst case over instances of fixed size $n$, for $n$
+asymptotically tending to infinity. This approach was refined in many
+ways, but most notably for NP-difficult problems under the term
+``Parameterized
+Complexity''~\cite{2006-BOOK-ParameterizedComplexityTheory-FlumGrohe},
 for polynomial problems under the term ``Adaptive
 Algorithms''~\cite{1992-ACMCS-ASurveyOfAdaptiveSortingAlgorithms-EstivillCastroWood,1992-ACJ-AnOverviewOfAdaptiveSorting-MoffatPetersson},
 and more simply for data encodings under the term of ``Data
 Compression''~\cite{2013-TCS-OnCompressingPermutationsAndAdaptiveSorting-BarbayNavarro},
 for a wide range of problems and data types.  Such a variety of
-results has motivated the classification of them: in the
-context of NP-hard problems with a theory of Fixed Parameter
+results has motivated the classification of them: in the context of
+NP-hard problems with a theory of Fixed Parameter
 Tractability~\cite{2006-BOOK-ParameterizedComplexityTheory-FlumGrohe},
 and in the context of \textsc{Sorting} in the comparison model with a
 theory of reduction between
@@ -37,7 +38,7 @@ optimality~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
 both for \textsc{Convex Hull}) and those taking advantage of both in a
 synergistic way.
 
-By ``\emph{input order}'' we mean algorithms taking advantage of the
+By ``\emph{input order}'', we mean to consider algorithms taking advantage of the
 order of the input, for example, the order of the values in a sequence
 of numbers or the order in which the points are given in a
 polygonal chain.
@@ -74,10 +75,10 @@ $O(n(1{+}\log{\kappa})) \subseteq O(n\log{n})$. This result takes
 advantage of the order in which the points are given i.e., the input
 order.
 
-By ``\emph{input structure}'' we mean algorithms taking advantage of
-the structure of the instance, for example, the frequencies of the
-values in a multiset or the relative positions of the points in a set
-of planar points.
+By ``\emph{input structure}'', we mean to consider algorithms taking
+advantage of the structure of the instance, for example, the
+frequencies of the values in a multiset or the relative positions of
+the points in a set of planar points.
 % Input structure sorting
 Concerning the {\sc{Sorting}} problem, as early as 1976, Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira}
@@ -120,11 +121,11 @@ entropy of the distribution of the points into a certificate of the
 instance). This result takes advantage of the positions of the points
 i.e., the structure of the instance.
 
-By taking advantage of both in a synergistic way we mean algorithms
-that perform as good as those taking advantage either of the order or
-the structure for every instance, and much better on instances where
-they can take advantage of both at the same time. As far as we know
-every known approach takes advantage of either the order or the
+By ``synergistic'', we mean to consider algorithms that perform as
+good as those taking advantage either of the order or the structure
+for every instance, and much better on instances where they can take
+advantage of both at the same time, in a synergistic way. As far as we
+know, every known approach so far takes advantage of either the order or the
 structure but not of both.
 
 % Hypothesis
@@ -135,40 +136,37 @@ and structure in a synergistic way.~\\
 
 % Conclusion
 
-Through the study of the sorting of multisets according to the
-potential ``easiness'' in both the order and the values in the
-multiset, in Section~\ref{sec:syn-sort} we show an example of the
-difficulty of combining both into a single hybrid synergistic algorithmic
-technique. 
-This improves upon both algorithms from Munro and
+In Section 2, we start by studying the sorting of multisets according
+to the potential ``easiness'' in both the order and the values in the
+multiset. We show result examples of the difficulty of combining both
+the order and the structure in the input into a single hybrid
+synergistic algorithmic technique.  This improves upon both algorithms
+from Munro and
 Spira~\cite{1976-JComp-SortingAndSearchingInMultisets-MunroSpira} and
 Takaoka~\cite{2009-Chapter-PartialSolutionAndEntropy-Takaoka}.
 %
-Through the study of the support of \texttt{rank} and \texttt{select}
-queries on multisets according to the potential ``easiness'' in both
-the order and the values in the queries themselves (in addition to the
-potential easiness in the data being queried in order and structure),
-in Section~\ref{sec:multiselect} and Section~\ref{sec:dds} we extend
-the results to the context of \textsc{MultiSelection} and
-\textsc{Deferred Data Structures} supporting \texttt{rank} and
-\texttt{select} queries on multisets. This improves upon the
-\textsc{MultiSelection} algorithms from Dobkin and
+We extend the results to the context of supporting \texttt{rank} and
+\texttt{select} queries on multisets, offline and online, according to
+the potential ``easiness'' in both the order and the values in the
+queries themselves (in addition to the potential easiness in the data
+being queried in order and structure). In the offline setting, this
+improves upon the algorithms from Dobkin and
 Munro~\cite{1981-JACM-OptimalTimeMinimalSpaceSelectionAlgorithms-DobkinMunro}
 and Kaligosi et
-al.~\cite{2005-ICALP-TowardsOptimalMultopleSelection-KaligosiMehlhornMunroSanders}
-and improves upon the \textsc{Deferred Data Structure} results from
-Barbay et
+al.~\cite{2005-ICALP-TowardsOptimalMultopleSelection-KaligosiMehlhornMunroSanders}.
+In the online setting, this improves upon the results from Barbay et
 al.'s~\cite{2016-JDA-NearOptimalOnlineMultiselectionInInternalAndExternalMemory-BarbayGuptaRaoSorenson}
 by adding 3 new measures of difficulty (input order, input structure
 and query order) to the single one previously considered (query
 structure). These combinations yield a better understanding of the
-problems and more efficient solutions which we hope to extend to other
-problems such as \textsc{Compressed Data Structures} (described in
-Sections~\ref{sec:compressed}), \textsc{Maxima} (described in
-Section~\ref{sec:maxima}) and \textsc{Convex Hull} computation
-(described in Section~\ref{sec:hull}). In Section~\ref{sec:con}, we
-conclude with a review of the results we have submitted and specify
-the plan to solve the problems in which we are working now.
+problems and more efficient solutions, which we hope to extend to
+\textsc{Compressed Data Structures} for several problems (described in
+Sections~\ref{sec:compressed}), the computation of the \textsc{Maxima}
+(described in Section~\ref{sec:maxima}) and \textsc{Convex Hull}
+(described in Section~\ref{sec:hull}) of a set of points in the
+plane. In Section~\ref{sec:con}, we conclude with a review of the
+results that we have already submitted and specify the plan to solve
+the remaining problems.
 
 \section{Sorting Solutions}
 \label{sec:sort}
@@ -256,8 +254,8 @@ the advantage of both the order and structure in the input all at once
 when sorting a multiset. The first one is a straightforward
 application of previous results and helps introduce the framework of
 the analysis, while the second one prepares the ground for the
-\textsc{MultiSelection} algorithm (Section~\ref{sec:multiselect}) and
-the \textsc{Deferred Data Structures} (Section~\ref{sec:dds}), which
+\textsc{MultiSelection} algorithm (described in Section~\ref{sec:multiselect}) and
+the \textsc{Deferred Data Structures} (described in Section~\ref{sec:dds}), which
 take advantage of the order and structure in the data and of the order
 and structure in the queries.
 
@@ -267,7 +265,7 @@ and structure in the queries.
 
 In 2000, Demaine et
 al.~\cite{2000-SODA-AdaptiveSetIntersectionsUnionsAndDifferences-DemaineLopezOrtizMunro}
-described the algorithm \texttt{DLM Union}, an algorithm that computes
+described the algorithm \texttt{DLM Union}, to compute
 the union of $\rho$ sorted sets.  The algorithm scans the sets from
 left to right identifying blocks of consecutive elements in the sets
 that are also consecutive in the sorted union. The time complexity of
@@ -295,9 +293,11 @@ are referred to as \emph{gaps} in the analysis of the algorithm.
   \sum^{\chi}_{i=1}\log{\binom{\rho}{m_i}})$.
 \end{INUTILE}
 %
-Demaine et al. showed that the time complexity of the \texttt{DLM
-  Union} algorithm is within a constant factor of the complexity of
-any other algorithm computing the union of these sorted sets.
+Demaine et
+al.~\cite{2000-SODA-AdaptiveSetIntersectionsUnionsAndDifferences-DemaineLopezOrtizMunro}
+showed that the time complexity of the \texttt{DLM Union} algorithm is
+within a constant factor of the complexity of any other algorithm
+computing the union of these sorted sets.
 
 \begin{minipage}[c]{.45\textwidth}
   \centering
@@ -519,11 +519,14 @@ Using these definitions, we generalize the results in Section~\ref{sec:syn-sort}
 \end{theorem}
 \end{INUTILE}
 
-In the \textsc{MultiSelection} problem, the queries are given all at the same time (i.e.,
-offline). In the context where they arrive one at a time (i.e., online), we define
-two \textsc{Deferred Data Structures} for answering online
-\texttt{rank} and \texttt{select} queries, both inspired by the algorithm
+In the \textsc{MultiSelection} problem, the queries are given all at
+the same time (i.e., offline). Next, we consider the context where
+they arrive one at a time (i.e., online), defining two
+\textsc{Deferred Data Structures} for answering online \texttt{rank}
+and \texttt{select} queries, both inspired by the algorithm
 \texttt{Quick Synergy MultiSelection}.
+
+\newpage
 
 \subsection{Deferred Data Structures Supporting \texttt{rank} and
   \texttt{select} on MultiSets}
@@ -709,8 +712,14 @@ order and input structure techniques.
 \section{Compressed Data Structures}
 \label{sec:compressed}
 
-Consider an array ${\mathcal{A}}[1..n]$ of $n$ comparable objects. A \emph{Range
-  Minimum
+A natural extension of our synergistic results about \textsc{Sorting},
+\textsc{MultiSelection} and \textsc{Deferred Data Structure} is the
+design of \textsc{Compressed Data Structures} for multisets supporting
+\texttt{rank} and \texttt{select} operators.
+
+We also consider \textsc{Compressed Data Structures} supporting other
+operators. Consider an array ${\mathcal{A}}[1..n]$ of $n$ comparable
+objects. A \emph{Range Minimum
   Query}~\cite{1993-SICOMP-RecursiveStarTreeParallelDataStructure-BerkmanVishkin}
 consists of a pair of integers $i$ and $j$ such that
 $1\le i\le j\le n$, and is answered by
@@ -839,7 +848,7 @@ In 1985, Kirkpatrick and
 Seidel~\cite{1985-SOCG-OutputSizeSensitiveAlgorithmsForFindingMaximalVectors-KirkpatrickSeidel}
 described an output-sensitive algorithm to solve the \textsc{Maxima}
 problem in the plane. They show that the time complexity of the
-algorithm is within $O(n\log{h}) \subseteq O(n\log{n})$, where $n$ is
+algorithm is within $O(n(1+\log{h})) \subseteq O(n\log{n})$, where $n$ is
 the size of the set $\mathcal{S}$ of input points and $h$ is the size
 of the set of maximal points. Afshani et
 al.~\cite{2009-FOCS-InstanceOptimalGeometricAlgorithms-AfshaniBarbayChan}
@@ -906,7 +915,7 @@ These results suggest the following questions:
     %% Input Order Maxima
   \item Is there an algorithm that takes advantage of the input order for
     computing the maximal points in a more efficient way
-    than the previous one?
+    than the previous described?
     %% Synergistic Maxima
   \item Is there an algorithm for computing the maximal points which takes the
     best advantage of both the \emph{input order} and the \emph{input
@@ -920,10 +929,11 @@ These results suggest the following questions:
     easiness in the input, but additionally also of notions of
     easiness in the queries, such as the \emph{query structure} and
     the \emph{query order}?
-\end{enumerate}}
+  \end{enumerate}}
 
-The state of the art of the \textsc{Convex Hull} computation problem
-is similar to \textsc{Maxima} problem.
+Next, we consider the problem of computing the \textsc{Convex Hull} in
+the plane, for which the state of the art is similar to that of the
+computation of the \textsc{Maxima}.
 
 \section{Convex Hull Solutions}
 \label{sec:hull}
@@ -973,6 +983,9 @@ applicable to the \textsc{Convex Hull} problem:
 \textbf{
   \begin{enumerate}
     %% Synergistic Convex Hull
+  \item Are there algorithms that take advantage of the input order
+    and that consider other measures of difficulty other than the one
+    described previously?
   \item Is there an algorithm for computing the Convex Hull of a set
     of points which takes the best advantage of both the \emph{input
       order} and the \emph{input structure} in a synergistic way, so
@@ -1010,45 +1023,64 @@ for the 12th of December, 2016.
 % Maxima
 
 We are working now on a more efficient description of ``input order''
-based algorithms for the Maxima problem (see Section~\ref{sec:maxima}
-for the description of the problem). Next, we list the questions that
-we are trying to answer step by step:
+based algorithms for the computation of the \textsc{Maxima} (see
+Section\ref{sec:maxima} for the description of the problem). It is not
+possible to compute the \textsc{Maxima} of a simple chain in linear
+time in the worst case over instances of size $n$. This problem can be
+reduced to the \textsc{Union} problem. We plan to generalize other
+measures of presortedness for the \textsc{Sorting} problem to the
+computation of the \textsc{Maxima} and \textsc{Convex Hull} of a set
+of planar points.
 
-\begin{enumerate}
-\item It is not possible to compute the \textsc{Maxima} of a simple
-  chain in linear time in the worst case over instances of size
-  $n$. This problem can be reduced to the \textsc{Union} problem. Is it
-  possible to strengthen the conditions for a simple chain in order to
-  verify if the chain meets the conditions in linear time and to
-  compute its \textsc{Maxima} in linear time?
-\item Is it possible to generalize \emph{Shuffled Up-Sequences}
-  (\emph{SUS}) for a sequence of
-  numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
-  (i.e., the minimum number of ascending subsequences into which can
-  be partitioned the given sequence) to the \textsc{Maxima} and
-  \textsc{Convex Hull} problems?
-\item It is possible to generalize \emph{Shuffled Monotone
-    Subsequences} (\emph{SMS}) for a sequence of
-  numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
-  (i.e., the minimum number of monotone (ascending and descending)
-  subsequences into which can be partitioned the given sequence) to
-  the \textsc{Maxima} and \textsc{Convex Hull} problems?
-\end{enumerate}
+We are working in a description of an algorithm for computing the \textsc{Union}
+of $k$ \textsc{Maximas}. If we manage to obtain an algorithm that is
+optimal for every instance for the \textsc{Union Maxima} problem, then
+this algorithm yields a synergistic algorithm for the
+computation of the \textsc{Maxima}. The same is valid for the
+computation of the \textsc{Convex Hull} of a set of points in the plane.
 
-We have already obtained a \textsc{MultiMaxima} algorithm which optimally takes
-advantage of the structure of the input points and the structure of
-the query points. The next step is to combine this results with input
-order results in a sinergistic way.
+\begin{INUTILE}
+  Next, we list the questions that we are trying to answer step by
+  step:
+
+  \begin{enumerate}
+  \item It is not possible to compute the \textsc{Maxima} of a simple
+    chain in linear time in the worst case over instances of size
+    $n$. This problem can be reduced to the \textsc{Union} problem. Is
+    it possible to strengthen the conditions for a simple chain in
+    order to verify if the chain meets the conditions in linear time
+    and to compute its \textsc{Maxima} in linear time?
+  \item Is it possible to generalize \emph{Shuffled Up-Sequences}
+    (\emph{SUS}) for a sequence of
+    numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
+    (i.e., the minimum number of ascending subsequences into which can
+    be partitioned the given sequence) to the \textsc{Maxima} and
+    \textsc{Convex Hull} problems?
+  \item It is possible to generalize \emph{Shuffled Monotone
+      Subsequences} (\emph{SMS}) for a sequence of
+    numbers~\cite{1990-SWAT-SortingShuffledMonotoneSequences-LevcopoulosPetersson}
+    (i.e., the minimum number of monotone (ascending and descending)
+    subsequences into which can be partitioned the given sequence) to
+    the \textsc{Maxima} and \textsc{Convex Hull} problems?
+  \end{enumerate}
+\end{INUTILE}
+
+We have already obtained a \textsc{MultiMaxima} algorithm which
+optimally takes advantage of the structure of the input and query
+points. The next step is to combine this results with input order
+results in a synergistic way.
 % Convex Hull
-For the \textsc{Convex Hull} problem we have similar questions
+For the \textsc{Convex Hull} problem, we have similar questions
 concerning synergistic solutions.
 
 % Compressed Data Structure
 
 In March and April 2017, the author plans to do an internship in South
 Korea to work with Srinivasa Rao Satti in Synergistic Compressed Data
-Structures (see Section~\ref{sec:compressed} for the description of
-the problem).
+Structures for supporting \texttt{rank} and \texttt{select} on
+multisets and \texttt{range minimum queries} and related operators on
+multisets (see Section~\ref{sec:compressed} for the description of the
+problem).
 
 We predict that such analysis techniques will take on more importance
 in the future, along with the growth of the gap between practical
