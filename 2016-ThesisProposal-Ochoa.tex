@@ -41,32 +41,30 @@
 %\doublespacing
 \maketitle
 \begin{abstract}
-  Existing Adaptive Sorting algorithms can be partitioned between
-  those taking advantage of the input structure and those taking
-  advantage of the input order: Munro and Spira (1976) described a
-  sorting algorithm that sorts a multiset $\mathcal{M}$ optimally
-  taking advantage of the multiplicities of the distinct elements in
-  $\mathcal{M}$ (i.e., input structure) and Takaoka (1997) described a
-  sorting algorithm that sorts an array $\mathcal{A}$ optimally taking
-  advantage of the distribution of the sizes of the maximal sorted
-  subblocks that form $\mathcal{A}$ (i.e., input order). We develop
-  new techniques in order to further refine this approach and to take
-  advantage all at once of the structure and the order in the input
-  for the \textsc{Sorting} problem. The resulting algorithms perform
-  much better on large classes of instances, while always performing
-  asymptotically as good as previous solutions. We extend this
-  analysis to more complex problems like supporting multiple
-  \texttt{rank} and \texttt{select} queries on multisets, offline and
-  online, taking further advantage of the order and structure in the
-  queries, and review other potential problems suitable for this kind
+  Existing Adaptive algorithms can be partitioned between those taking
+  advantage of the input structure and those taking advantage of the
+  input order: Munro and Spira (1976) described a sorting algorithm
+  that sorts a multiset $\mathcal{M}$ optimally taking advantage of
+  the multiplicities of the distinct elements in $\mathcal{M}$ (i.e.,
+  input structure) and Takaoka (1997) described a sorting algorithm
+  that sorts an array $\mathcal{A}$ optimally taking advantage of the
+  distribution of the sizes of the maximal sorted subblocks that form
+  $\mathcal{A}$ (i.e., input order). We develop new techniques in
+  order to further refine this approach and to take advantage all at
+  once of the structure and the order in the input. The resulting
+  algorithms perform much better on large classes of instances, while
+  always performing asymptotically as good as previous solutions. We
+  extend this analysis to more complex problems like supporting
+  multiple queries, offline and online, taking further advantage of
+  the order and structure in the queries. We describe submitted
+  algorithms and data structures for the \textsc{Sorting} problem on
+  multisets, and review other potential problems suitable for this kind
   of extension, such as the computation of the \textsc{Maxima} and
   \textsc{Convex Hull} of a set of points in the plane.
 \end{abstract}
 \clearpage
 
 \input{proposal}
-
-\newpage
 
 \bibliographystyle{plain}
 \bibliography{bibliographyDatabaseJeremyBarbay,publicationsJeremyBarbay,addedForThePaper}
